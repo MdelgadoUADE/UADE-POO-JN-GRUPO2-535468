@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.project.controler.ApplicationController;
+import org.example.project.views.windows.GameWindow;
 import org.example.project.views.windows.RankingWindow;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -8,6 +9,7 @@ import org.example.project.views.windows.RankingWindow;
 public class Main {
     public static void main(String[] args) {
         //ApplicationController.startApplication();
-        new RankingWindow();
+        //new RankingWindow();
+        new GameWindow();
     }
 }
