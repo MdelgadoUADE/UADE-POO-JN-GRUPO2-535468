@@ -5,6 +5,8 @@ import org.example.structures.EntradaJugador;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 public class RankingWindow extends JFrame {
@@ -27,6 +29,13 @@ public class RankingWindow extends JFrame {
 
     public void confEvents(){
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+        backbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RankingWindow.super.dispose();
+            }
+        });
     }
 
     public void confWindow(){

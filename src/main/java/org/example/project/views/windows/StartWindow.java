@@ -2,6 +2,8 @@ package org.example.project.views.windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class StartWindow extends JFrame {
 
@@ -21,6 +23,28 @@ public class StartWindow extends JFrame {
 
     public void confEvents(){
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        //Definicion de botones
+        startGamebtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        rankingTablebtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new RankingWindow();
+
+            }
+        });
+        exitbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0); //cierro all con el codigo exitoso
+            }
+        });
+
     }
 
     private void confWindow(){
