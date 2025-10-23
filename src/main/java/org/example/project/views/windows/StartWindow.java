@@ -1,9 +1,15 @@
 package org.example.project.views.windows;
 
+import org.example.project.models.Ranking;
+import org.example.project.views.modals.ContinueOption;
+import org.example.project.views.modals.RankingAskModal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class StartWindow extends JFrame {
 
@@ -29,16 +35,43 @@ public class StartWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                GameWindow gw = new GameWindow();
+                StartWindow.super.setVisible(false);
+
+                gw.addWindowListener(new WindowAdapter() {
+                    //Window listener permite minimizar la ventana principal sin tener que cerrarla
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+
+                        if (new ContinueOption(StartWindow.this).getResult() == JOptionPane.NO_OPTION){
+                            Ranking.getInstance().addEntrada(new RankingAskModal(StartWindow.this).getName(),1);
+                            gw.dispose();
+                            StartWindow.super.setVisible(true);
+                        }
+                    }
+                });
             }
         });
         rankingTablebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RankingWindow();
+
+                RankingWindow rw =  new RankingWindow(StartWindow.this);
+                StartWindow.super.setVisible(false);
+
+                rw.addWindowListener(new WindowAdapter() {
+
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        super.windowClosing(e);
+                        StartWindow.super.setVisible(true);
+                    }
+                });
 
             }
         });
         exitbtn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0); //cierro all con el codigo exitoso

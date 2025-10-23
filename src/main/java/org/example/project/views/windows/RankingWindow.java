@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 public class RankingWindow extends JFrame {
 
+    private JFrame lastPanel;
     private JLabel titlelbl;
     private JLabel textlbl;
     private JPanel rankings;
@@ -18,9 +19,8 @@ public class RankingWindow extends JFrame {
 
     private JButton backbtn;
 
-    public RankingWindow() {
-        jugadores = Ranking.getInstance().aa();
-
+    public RankingWindow(JFrame lastPanel) {
+        this.lastPanel = lastPanel;
         this.confWindow();
         this.confEvents();
         this.setVisible(true);
@@ -34,6 +34,7 @@ public class RankingWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RankingWindow.super.dispose();
+                lastPanel.setVisible(true);
             }
         });
     }
@@ -46,8 +47,6 @@ public class RankingWindow extends JFrame {
         this.titlelbl = new JLabel("Rankings");
         this.textlbl = new JLabel("Here lie the best of the best");
         this.backbtn = new JButton("Ir Atras");
-
-
 
         this.add(titlelbl);
         this.add(textlbl);

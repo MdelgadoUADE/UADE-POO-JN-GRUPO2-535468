@@ -7,7 +7,7 @@ import java.util.LinkedList;
 public class Ranking {
 
     private static Ranking instance;
-    private LinkedList<EntradaJugador> jugadores = new LinkedList<EntradaJugador>();
+    private LinkedList<EntradaJugador> jugadores = new LinkedList<>();
 
     private Ranking(){
     }
@@ -16,6 +16,10 @@ public class Ranking {
         if (instance == null)
             instance = new Ranking();
         return instance;
+    }
+
+    public void addEntrada(String nombre, int puntaje){
+        jugadores.add(new EntradaJugador(nombre, puntaje));
     }
 
     public LinkedList<EntradaJugador> aa() {
