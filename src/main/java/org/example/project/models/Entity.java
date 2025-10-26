@@ -8,4 +8,7 @@ public class Entity {
     // protected Vector2 hitbox[]; definir implementacion de hitboxes
 
 
+    public Vector2 getPosition() {
+        return position;
+    }
 }

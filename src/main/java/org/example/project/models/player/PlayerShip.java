@@ -40,4 +40,7 @@ public class PlayerShip extends Entity {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }
