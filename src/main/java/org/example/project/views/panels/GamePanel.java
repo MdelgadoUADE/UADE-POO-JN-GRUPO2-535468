@@ -5,40 +5,45 @@ import org.example.project.views.listeners.KeyListenerAdapter;
 import org.example.project.controler.GameController;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GamePanel extends JPanel {
     private ShipImg imagenNave;
+    private GamePanelPC panelPC;
 
-    public GamePanel() {
-        System.out.println("Constructor Imagen Panel");
+    public GamePanel(int ancho, int alto, GamePanelPC panelPC) {
+        this.panelPC = panelPC;
 
-        // Config panel
         setLayout(null);
-        setPreferredSize(new Dimension(400, 400));
+        setPreferredSize(new Dimension(ancho, alto));
         setBackground(Color.BLACK);
 
-        // Crear imagen
         imagenNave = new ShipImg();
-        imagenNave.setBounds(200, 350, 50, 50);
+        // colocar nave centrada horizontalmente
+        int xInicial = (ancho - imagenNave.getAncho()) / 2;
+        int yInicial = (alto - imagenNave.getAlto()) / 2;
+        imagenNave.setBounds(xInicial, yInicial, imagenNave.getAncho(), imagenNave.getAlto());
         add(imagenNave);
 
         setFocusable(true);
         requestFocusInWindow();
 
-        // KeyListener usando tu clase personalizada
-        addKeyListener(new KeyListenerAdapter() {
+        addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                // Si querés también que funcione con flechas:
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         int nuevaXI = GameController.getInstancia().moverNaveIzquierda();
-                        imagenNave.mover(imagenNave.getY(), nuevaXI);
+                        imagenNave.mover(nuevaXI, imagenNave.getY());
                         break;
                     case KeyEvent.VK_RIGHT:
                         int nuevaXD = GameController.getInstancia().moverNaveDerecha();
-                        imagenNave.mover(imagenNave.getY(), nuevaXD);
+                        imagenNave.mover(nuevaXD, imagenNave.getY());
+                        break;
+                    case KeyEvent.VK_SPACE:
+                        int centroNave = imagenNave.getX() + imagenNave.getAncho() / 2;
+                        panelPC.crearProyectil(centroNave);
                         break;
                 }
             }
