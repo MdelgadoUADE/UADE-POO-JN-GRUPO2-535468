@@ -1,18 +1,17 @@
 package org.example.project.views.panels;
 
 import org.example.project.views.imgs.ShipImg;
-import org.example.project.views.listeners.KeyListenerAdapter;
 import org.example.project.controler.GameController;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class GamePanel extends JPanel {
+public class GamePanelPlayer extends JPanel {
     private ShipImg imagenNave;
     private GamePanelPC panelPC;
 
-    public GamePanel(int ancho, int alto, GamePanelPC panelPC) {
+    public GamePanelPlayer(int ancho, int alto, GamePanelPC panelPC) {
         this.panelPC = panelPC;
 
         setLayout(null);

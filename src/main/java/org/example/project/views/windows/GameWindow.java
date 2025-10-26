@@ -1,13 +1,13 @@
 package org.example.project.views.windows;
 
-import org.example.project.views.panels.GamePanel;
+import org.example.project.views.panels.GamePanelPlayer;
 import org.example.project.views.panels.GamePanelPC;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GameWindow extends JFrame {
-    private GamePanel panelJugador;
+    private GamePanelPlayer panelJugador;
     private GamePanelPC panelPC;
 
     public GameWindow(){
@@ -19,7 +19,7 @@ public class GameWindow extends JFrame {
         int altoPC = 400;      // altura del panel de proyectiles
 
         panelPC = new GamePanelPC(ancho, altoPC);
-        panelJugador = new GamePanel(ancho, altoJugador, panelPC);
+        panelJugador = new GamePanelPlayer(ancho, altoJugador, panelPC);
 
         add(panelPC, BorderLayout.CENTER);
         add(panelJugador, BorderLayout.SOUTH);

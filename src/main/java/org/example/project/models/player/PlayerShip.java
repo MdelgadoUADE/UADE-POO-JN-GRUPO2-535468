@@ -35,4 +35,9 @@ public class PlayerShip extends Entity {
         System.out.println("Se movio derecha objeto nave");
         return this.posicion.getX();
     }
+
+    public int getHealth() {
+        return health;
+    }
+
 }
