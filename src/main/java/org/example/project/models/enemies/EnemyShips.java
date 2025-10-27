@@ -5,26 +5,15 @@ import org.example.project.models.extras.AreaDeJuego;
 import org.example.project.models.extras.Vector2;
 
 public class EnemyShips extends Entity {
-    private int health = 1;
-    private Vector2 posicion;
+    
     private int velocidad;
-    private int alto;
-    private int ancho;
-    private AreaDeJuego area;
-
-    public int getHealth() {
-        return health;
+    
+    public EnemyShips(int x, int y, int velocidad, int alto, int ancho, AreaDeJuego area){
+        this.position = new Vector2(x,y);
+        this.areaObjeto = new AreaDeJuego(alto,ancho);
+        this.health = 4;
+        this.area=area;
+        this.velocidad=velocidad;
     }
 
-    public Vector2 getPosicion() {
-        return posicion;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setPosicion(Vector2 posicion) {
-        this.posicion = posicion;
-    }
 }

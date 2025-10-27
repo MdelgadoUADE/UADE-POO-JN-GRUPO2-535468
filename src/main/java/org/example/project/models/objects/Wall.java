@@ -6,24 +6,15 @@ import org.example.project.models.extras.Vector2;
 
 public class Wall extends Entity {
 
-    private int health = 1;
-    private Vector2 posicion;
-    private int alto;
-    private int ancho;
-    private AreaDeJuego area;
-
-
-    public void setHealth(int health) {
-        this.health = health;
+    public Wall(int x,int y, int ancho, int alto,AreaDeJuego area) {
+        this.position = new Vector2(x,y); // 'this.position' es el campo protected de Entity
+        this.areaObjeto= new AreaDeJuego(alto,ancho);
+        this.health = 4;
+        this.area=area;
     }
 
-    public int getHealth() {
-        return health;
-    }
 
-    public Vector2 getPosicion() {
-        return posicion;
-    }
+
 }
 
 
