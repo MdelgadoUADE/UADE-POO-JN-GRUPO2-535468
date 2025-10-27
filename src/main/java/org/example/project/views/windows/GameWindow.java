@@ -11,7 +11,7 @@ public class GameWindow extends JFrame {
     private GamePanelPC panelPC;
 
     public GameWindow(){
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //DEJAR EN DO_NOTHING_ON_CLOSE PARA EVITAR CERRAR EL JUEGO
         setLayout(new BorderLayout());
 
         int ancho = 400;

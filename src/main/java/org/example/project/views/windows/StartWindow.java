@@ -1,5 +1,6 @@
 package org.example.project.views.windows;
 
+import org.example.project.controler.PlayerController;
 import org.example.project.models.Ranking;
 import org.example.project.views.modals.ContinueOption;
 import org.example.project.views.modals.RankingAskModal;
@@ -44,7 +45,7 @@ public class StartWindow extends JFrame {
                     public void windowClosing(WindowEvent e) {
 
                         if (new ContinueOption(StartWindow.this).getResult() == JOptionPane.NO_OPTION){
-                            Ranking.getInstance().addEntrada(new RankingAskModal(StartWindow.this).getName(),1);
+                            Ranking.getInstance().addEntrada(new RankingAskModal(StartWindow.this).getName());
                             gw.dispose();
                             StartWindow.super.setVisible(true);
                         }
