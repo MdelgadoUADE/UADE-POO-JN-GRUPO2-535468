@@ -8,6 +8,7 @@ import org.example.project.models.objects.Proyectile;
 import org.example.project.models.objects.Wall;
 import org.example.project.models.player.PlayerShip;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class GameController {
@@ -23,7 +24,10 @@ public class GameController {
     private GameController(){
         area = new AreaDeJuego(400, 400);
         nave = new PlayerShip(200,350,7,50,50,area);
-
+        proyectilesEnemigos = new LinkedList<>();
+        proyectilesJugador = new LinkedList<>();
+        enemyShips = new LinkedList<>();
+        walls = new LinkedList<>();
     }
 
     public static GameController getInstancia(){
@@ -52,38 +56,43 @@ public class GameController {
         -Bala nave contra muro quita 2 puntos
         -Bala enemiga contra muro quita 1 punto
          */
-
-        //Caso bala propia contra muro y contra nave enemiga
-        for ( Proyectile bala : proyectilesJugador){
-            for (Wall muro : walls){
-                 boolean res = collision(bala , muro);
-                 if (res){
-                     muro.setDamage(2);
-                 }
+        if(!proyectilesJugador.isEmpty()) {
+            //Caso bala propia contra muro y contra nave enemiga
+            for ( Proyectile bala : proyectilesJugador){
+                for (Wall muro : walls){
+                    boolean res = collision(bala , muro);
+                    if (res){
+                        muro.setDamage(2);
+                    }
+                }
+                for (EnemyShips naveEnemiga : enemyShips){
+                    boolean res = collision(bala , naveEnemiga);
+                    if (res){
+                        naveEnemiga.setDamage(1);
+                    }
+                }
             }
-            for (EnemyShips naveEnemiga : enemyShips){
-                boolean res = collision(bala , naveEnemiga);
-                if (res){
-                    naveEnemiga.setDamage(1);
+
+        }
+
+
+        if(!proyectilesEnemigos.isEmpty()){
+            //caso bala enemiga contra muro y nave propia
+            for ( Proyectile bala : proyectilesEnemigos){
+                for (Wall muro : walls){
+                    boolean res = collision(bala , muro);
+                    if (res){
+                        muro.setDamage(1);
+
+                    }
+                }
+
+                if( collision(bala,nave)){
+                    nave.setDamage(1);
                 }
             }
         }
 
-
-        //caso bala enemiga contra muro y nave propia
-        for ( Proyectile bala : proyectilesEnemigos){
-            for (Wall muro : walls){
-                boolean res = collision(bala , muro);
-                if (res){
-                    muro.setDamage(1);
-
-                }
-            }
-
-            if( collision(bala,nave)){
-                nave.setDamage(1);
-            }
-        }
 
     }
 
@@ -99,7 +108,7 @@ public class GameController {
         int e2Ancho= entity2.getArea().getAncho();
         int e2Alto=entity2.getArea().getAlto();
 
-
+         System.out.println("se detecto colision");
         // caso de colision
         return(x1 < x2+e2Ancho &&
                 x1 + e1Ancho > x2 &&

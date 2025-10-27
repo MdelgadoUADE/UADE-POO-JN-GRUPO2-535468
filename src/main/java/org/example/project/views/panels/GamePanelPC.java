@@ -28,6 +28,12 @@ public class GamePanelPC extends JPanel {
         proyectilesJugador = new ArrayList<>();
         Timer timer = new Timer(10, e -> {
             //Mover Balas
+
+            if (GameController.getInstancia().checkShipHealth()){
+                ((Timer) e.getSource()).stop();
+                // finalizar juego porq estoy muerto.
+            }
+
             for (int i = 0; i < proyectilesJugador.size(); i++) {
                 ProyectileImg p = proyectilesJugador.get(i);
                 int nuevaY = p.getY() - 5;
@@ -39,13 +45,11 @@ public class GamePanelPC extends JPanel {
                     p.mover(p.getX(), nuevaY);
                 }
             }
-            if (GameController.getInstancia().checkShipHealth()){
-                ((Timer) e.getSource()).stop();
-            }
+
             //Mover Naves Kiara
             //GameController.getInstancia().moveEntitys();
             //Checkear colicones Seba
-            //GameController.getInstancia().checkColitions();
+            GameController.getInstancia().checkCollisions();
             //Checkear Healths Joaco
             //GameController.getInstancia().checkearHealth();
         });

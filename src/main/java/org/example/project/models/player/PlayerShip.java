@@ -13,6 +13,7 @@ public class PlayerShip extends Entity {
         this.velocidad = velocidad;
         this.areaObjeto= new AreaDeJuego(alto,ancho);
         this.area=area;
+        this.health=3;
     }
 
     public int moverIzquierda() {
