@@ -1,5 +1,6 @@
 package org.example.project.views.panels;
 
+import org.example.project.controler.PlayerController;
 import org.example.project.views.imgs.ShipImg;
 import org.example.project.controler.GameController;
 import javax.swing.*;
@@ -44,6 +45,9 @@ public class GamePanelPlayer extends JPanel {
                         int centroNave = imagenNave.getX() + imagenNave.getAncho() / 2;
                         panelPC.crearProyectil(centroNave);
                         break;
+                    case KeyEvent.VK_F1:
+                        PlayerController.getInstance().addScore(5);
+
                 }
             }
         });
