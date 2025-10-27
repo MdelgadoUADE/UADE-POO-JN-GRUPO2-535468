@@ -72,7 +72,8 @@ public class RankingWindow extends JFrame {
                 rankings.add(new JLabel(name));
                 rankings.add(new JLabel(String.valueOf(puntaje)));
             }
-        }
+            this.add(rankings);
+        } else this.add(new JLabel("Sin Jugadores"));
 
         this.add(backbtn);
 

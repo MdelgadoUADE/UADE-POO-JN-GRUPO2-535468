@@ -10,6 +10,8 @@ public class PlayerView {
     public int getScore() {
         return score;
     }
-    public void setScore(int score) {}
+    public void setScore(int score) {
+        this.score = score;
+    }
 
 }

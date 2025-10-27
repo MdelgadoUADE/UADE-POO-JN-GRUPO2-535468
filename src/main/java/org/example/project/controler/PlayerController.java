@@ -27,6 +27,11 @@ public class PlayerController {
         System.out.println("Score: " + scoreTracker.getScore());
     }
 
+    public void resetScore(){
+        scoreTracker.setScore(0);
+        view.setScore(0);
+    }
+
     public PlayerView getView() {
         return view;
     }

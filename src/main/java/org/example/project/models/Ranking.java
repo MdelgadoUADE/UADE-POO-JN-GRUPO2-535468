@@ -23,13 +23,13 @@ public class Ranking {
         return instance;
     }
 
-
     public void addEntrada(String nombre){
         jugadores.add(
                 new EntradaJugador(
                         nombre,
                         PlayerController.getInstance().getView().getScore()
         ));
+        PlayerController.getInstance().resetScore();
     }
 
     public RankingView getRankingView() {
