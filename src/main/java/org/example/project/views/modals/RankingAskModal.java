@@ -10,16 +10,18 @@ public class RankingAskModal {
     }
 
     public String getName() {
-        String s = (String)JOptionPane.showInputDialog(
+        return  (String)JOptionPane.showInputDialog(
                 container,
                 "Ingrese su nombre:",
-                "PERDISTE",
+                "HAS PERDIDO",
                 JOptionPane.PLAIN_MESSAGE,
                 null,
                 null,
                 null
         );
-        return s;
+    }
+    public void showWarning() {
+        JOptionPane.showMessageDialog(null, "No sera guardado el ranking", "HAS PERDIDO", JOptionPane.WARNING_MESSAGE);
     }
 
 }

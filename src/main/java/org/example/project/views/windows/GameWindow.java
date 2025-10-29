@@ -21,7 +21,7 @@ public class GameWindow extends JFrame {
         setLayout(new BorderLayout());
 
         //todo añadir aca la llamada a GameController para controlar la dificultad
-        panelDificultad = new DifficultyPanel(ancho, altoPC);
+        panelDificultad = new DifficultyPanel(ancho, altoPC, this);
         add(BorderLayout.CENTER, panelDificultad);
         pack();
         setLocationRelativeTo(null);

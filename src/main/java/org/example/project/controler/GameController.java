@@ -6,6 +6,7 @@ import org.example.project.models.extras.AreaDeJuego;
 import org.example.project.models.extras.Vector2;
 import org.example.project.models.objects.Proyectile;
 import org.example.project.models.objects.Wall;
+import org.example.project.models.others.Difficulty;
 import org.example.project.models.player.PlayerShip;
 
 import java.util.LinkedList;
@@ -13,6 +14,8 @@ import java.util.List;
 
 public class GameController {
     private static GameController instancia;
+
+    private Difficulty selectedDifficulty;
 
     private List<Wall> walls;
     private List<EnemyShips> enemyShips;
@@ -47,7 +50,9 @@ public class GameController {
 
     }
     */
-
+    public void setDifficulty(Difficulty difficulty){
+        selectedDifficulty = difficulty;
+    }
 
     public void checkCollisions(){
         /*Vamos a chequear collision entre elementos utilizando el método privado collision

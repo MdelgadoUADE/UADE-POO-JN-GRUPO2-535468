@@ -1,6 +1,8 @@
 package org.example.project.views.panels;
 
 import org.example.project.constants.DifficultyConstants;
+import org.example.project.controler.GameController;
+import org.example.project.views.windows.GameWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +16,12 @@ public class DifficultyPanel extends JPanel {
     private JButton guerreroBtn;
     private JButton maestroBtn;
 
-    public DifficultyPanel(int ancho, int alto)
+    private GameWindow fatherPanel;
+
+    public DifficultyPanel(int ancho, int alto, GameWindow fatherPanel)
     {
         setPanel(ancho, alto);
+        this.fatherPanel = fatherPanel;
     }
 
     private void setPanel(int ancho, int alto) {
@@ -37,18 +42,24 @@ public class DifficultyPanel extends JPanel {
         cadeteBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Se ha seleccionado: " + DifficultyConstants.DIFICULTAD_CADETE.getName());
+                GameController.getInstancia().setDifficulty(DifficultyConstants.DIFICULTAD_CADETE);
+                fatherPanel.setGamePanel();
             }
         });
 
         guerreroBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Se ha seleccionado: " + DifficultyConstants.DIFICULTAD_GUERRERO.getName());
+                GameController.getInstancia().setDifficulty(DifficultyConstants.DIFICULTAD_GUERRERO);
+                fatherPanel.setGamePanel();
             }
         });
 
         maestroBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Se ha seleccionado: " + DifficultyConstants.DIFICULTAD_MAESTRO.getName());
+                GameController.getInstancia().setDifficulty(DifficultyConstants.DIFICULTAD_MAESTRO);
+                fatherPanel.setGamePanel();
             }
         });
     }

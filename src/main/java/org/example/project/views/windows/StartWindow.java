@@ -45,7 +45,11 @@ public class StartWindow extends JFrame {
                     public void windowClosing(WindowEvent e) {
 
                         if (new ContinueOption(StartWindow.this).getResult() == JOptionPane.NO_OPTION){
-                            Ranking.getInstance().addEntrada(new RankingAskModal(StartWindow.this).getName());
+                            String name = new RankingAskModal(StartWindow.this).getName();
+                            if (name != null){
+                                Ranking.getInstance().addEntrada(name);
+                            } else new RankingAskModal(StartWindow.this).showWarning();
+
                             gw.dispose();
                             StartWindow.super.setVisible(true);
                         }

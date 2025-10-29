@@ -9,14 +9,11 @@ public class ContinueOption {
     }
 
     public int getResult(){
-        int result = JOptionPane.showConfirmDialog(
+        return JOptionPane.showConfirmDialog(
                 container,
                 "Desea continuar?",
                 "Confirmar Salida",
                 JOptionPane.YES_NO_OPTION
         );
-        return result;
     }
-
-
 }
