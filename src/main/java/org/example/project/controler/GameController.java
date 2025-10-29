@@ -116,6 +116,7 @@ public class GameController {
                 y1 + e1Alto > y2);
     }
 
+
     public boolean checkShipHealth(){
         return nave.getHealth()<=0;
     }

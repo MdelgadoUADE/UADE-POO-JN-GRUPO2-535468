@@ -2,17 +2,12 @@ package org.example.project.views.panels;
 
 import org.example.project.controler.GameController;
 import org.example.project.views.imgs.ProyectileImg;
-import org.example.project.views.imgs.ShipImg;
 
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.ArrayList;
 
 import javax.swing.*;
 import java.awt.*;
-
 
 public class GamePanelPC extends JPanel {
     private List<ProyectileImg> proyectilesJugador;
@@ -53,11 +48,7 @@ public class GamePanelPC extends JPanel {
             //Checkear Healths Joaco
             //GameController.getInstancia().checkearHealth();
         });
-
         timer.start();
-
-
-
     }
 
     public void crearProyectil(int centroNaveX) {
