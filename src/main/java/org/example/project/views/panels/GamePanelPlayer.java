@@ -48,6 +48,7 @@ public class GamePanelPlayer extends JPanel {
                     case KeyEvent.VK_F1:
                         PlayerController.getInstance().addScore(5);
 
+
                 }
             }
         });

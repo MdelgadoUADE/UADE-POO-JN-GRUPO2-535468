@@ -8,11 +8,9 @@ import org.example.project.models.objects.Proyectile;
 import org.example.project.models.objects.Wall;
 import org.example.project.models.others.Difficulty;
 import org.example.project.models.player.PlayerShip;
-import org.example.project.views.views.EntityView;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 public class GameController {
     private static GameController instancia;
@@ -46,70 +44,6 @@ public class GameController {
 
     public int moverNaveIzquierda(){
         return nave.moverIzquierda();
-    }
-
-    public int crearProyectilJugador(){
-        int centroNave = centroEntity(nave.getView());
-        Proyectile p = new Proyectile(centroNave, area.getAlto(), -5,50,50,area);
-        proyectilesJugador.add(p);
-        return p.getId();
-    }
-
-    public int crearProyectilEnemigo(int idNave){
-        EntityView e = buscarNaveEnemigo(idNave);
-        int centroNave = centroEntity(e);
-        int y = e.getArea().getAlto() + e.getPosition().getY();
-        Proyectile p = new Proyectile(centroNave, y, 5,50,50,area);
-        return p.getId();
-    }
-
-    public int centroEntity(EntityView entity){
-        return nave.getPosition().getX() + nave.getArea().getAlto()/ 2;
-    }
-
-
-    public EntityView buscarNaveEnemigo(int idNave){
-        for (int i = 0; i < enemyShips.size(); i++) {
-            if (idNave == enemyShips.get(i).getId()){
-                return enemyShips.get(i).getView();
-            }
-        }
-        return null;
-    }
-
-    public EntityView buscarProyectilJugador(int idProyectil){
-        for (int i = 0; i < proyectilesJugador.size(); i++) {
-            if (idProyectil == proyectilesJugador.get(i).getId()){
-                return proyectilesJugador.get(i).getView();
-            }
-        }
-        return null;
-    }
-
-    public int moverProyectil(int idProyectil){
-        for (int i = 0; i < proyectilesJugador.size(); i++) {
-            if (idProyectil == proyectilesJugador.get(i).getId()){
-                int nuevaY = proyectilesJugador.get(i).mover();
-                if (nuevaY < -proyectilesJugador.get(i).getArea().getAlto()) {
-                    proyectilesJugador.remove(proyectilesJugador.get(i));
-                }
-                return nuevaY;
-            }
-        }
-        return 0;
-    }
-
-
-
-    public int asignarDisparo(){
-
-        Random r = new Random();
-        int disparar =  r.nextInt(2);
-        if (disparar == 2){
-            int i =  r.nextInt(enemyShips.size()-1);
-            return enemyShips.get(i).getId();
-        }
-        return 0;
     }
     /*
     public Vector2 moverEntidad (){
@@ -186,8 +120,6 @@ public class GameController {
                 y1 < y2 + e2Alto &&
                 y1 + e1Alto > y2);
     }
-
-
 
 
     public boolean checkShipHealth(){
