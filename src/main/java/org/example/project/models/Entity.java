@@ -25,12 +25,7 @@ public class Entity {
     protected void setHealth(int health) {
         this.health = health;
     }
-
-    public  void setDamage(int damage){
-
-        this.setHealth(this.getHealth()-damage);
-    }
-
+    public  void setDamage(int damage){this.setHealth(this.getHealth()-damage);}
     public AreaDeJuego getArea() {
         return areaObjeto;
     }

@@ -3,14 +3,14 @@ package org.example.project.views.imgs;
 import javax.swing.*;
 import java.awt.*;
 
-import static javax.swing.text.StyleConstants.setIcon;
-
-public class ProyectileImg extends JLabel {
+public class ProyectileUpImg extends JLabel {
     private  int ancho;
     private  int alto;
+    private int id;
 
-    public ProyectileImg() {
-        System.out.println("Constructor Imagen Proyectil");
+    public ProyectileUpImg(int id) {
+        //System.out.println("Constructor Imagen Proyectil");
+        this.id = id;
         ancho = 50;
         alto = 50;
         Image imagen = new ImageIcon("proyectileUp.png").getImage();
@@ -27,4 +27,5 @@ public class ProyectileImg extends JLabel {
     // GETTERS
     public int getAncho() { return ancho; }
     public int getAlto() { return alto; }
+    public int getId() {return id;}
 }

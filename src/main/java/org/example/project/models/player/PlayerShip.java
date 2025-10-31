@@ -3,6 +3,7 @@ package org.example.project.models.player;
 import org.example.project.models.Entity;
 import org.example.project.models.extras.AreaDeJuego;
 import org.example.project.models.extras.Vector2;
+import org.example.project.views.views.EntityView;
 
 public class PlayerShip extends Entity {
 
@@ -30,6 +31,10 @@ public class PlayerShip extends Entity {
         }
         System.out.println("Se movio derecha objeto nave");
         return this.position.getX();
+    }
+
+    public EntityView getView() {
+        return new EntityView(areaObjeto,position,area,velocidad,0,health);
     }
 
 
