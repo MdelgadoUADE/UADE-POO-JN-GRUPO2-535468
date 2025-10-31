@@ -24,6 +24,7 @@ public class GameController {
     private PlayerShip nave;
     private AreaDeJuego area;
 
+
     private GameController(){
         area = new AreaDeJuego(400, 400);
         nave = new PlayerShip(200,350,7,50,50,area);
@@ -31,6 +32,8 @@ public class GameController {
         proyectilesJugador = new LinkedList<>();
         enemyShips = new LinkedList<>();
         walls = new LinkedList<>();
+        //test
+        proyectilesEnemigos.add(new Proyectile(100, area.getAlto()-20 ,50,20,10,area));
     }
 
     public static GameController getInstancia(){
@@ -82,6 +85,8 @@ public class GameController {
 
 
         if(!proyectilesEnemigos.isEmpty()){
+
+
             //caso bala enemiga contra muro y nave propia
             for ( Proyectile bala : proyectilesEnemigos){
                 for (Wall muro : walls){
@@ -92,8 +97,9 @@ public class GameController {
                     }
                 }
 
-                if( collision(bala,nave)){
+                if( collisionNave(bala,nave)){
                     nave.setDamage(1);
+
                 }
             }
         }
@@ -119,6 +125,25 @@ public class GameController {
                 x1 + e1Ancho > x2 &&
                 y1 < y2 + e2Alto &&
                 y1 + e1Alto > y2);
+    }
+
+
+    private boolean collisionNave(Entity entity1, Entity entity2){
+        int x1 = entity1.getPosition().getX();
+        int y1= entity1.getPosition().getY();
+        int x2 = entity2.getPosition().getX();
+        int y2= entity2.getPosition().getY();
+        int e1Ancho= entity1.getArea().getAncho();
+        int e1Alto=entity1.getArea().getAlto();
+        int e2Ancho= entity2.getArea().getAncho();
+        int e2Alto=entity2.getArea().getAlto();
+        int altoArea = area.getAlto();
+        int anchoArea = area.getAncho();
+
+
+        return(x1 < x2+e2Ancho &&
+                x1 + e1Ancho > x2 && y1== altoArea-e1Alto);
+
     }
 
 
