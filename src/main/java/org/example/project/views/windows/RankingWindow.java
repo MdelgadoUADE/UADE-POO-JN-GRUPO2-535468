@@ -1,13 +1,11 @@
 package org.example.project.views.windows;
 
 import org.example.project.models.Ranking;
-import org.example.structures.EntradaJugador;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 public class RankingWindow extends JFrame {
 
@@ -43,21 +41,13 @@ public class RankingWindow extends JFrame {
         Container c = this.getContentPane();
         c.setLayout(new GridLayout(4,1));
 
-        this.titlelbl = new JLabel("Rankings");
-        this.textlbl = new JLabel("Here lie the best of the best");
+        this.titlelbl = new JLabel("Rankings", SwingConstants.CENTER);
+        this.textlbl = new JLabel("Here lie the best of the best", SwingConstants.CENTER);
         this.backbtn = new JButton("Ir Atras");
 
         this.add(titlelbl);
         this.add(textlbl);
 
-//        if (!jugadores.isEmpty()){
-//            rankings = new JPanel(new GridLayout(jugadores.size(),2));
-//            for (int i = 0; i < jugadores.size(); i++){
-//                rankings.add(new JLabel(jugadores.get(i).getNombreJugador()));
-//                rankings.add(new JLabel(String.valueOf(jugadores.get(i).getPuntaje())));
-//            }
-//            this.add(rankings);
-//        } else this.add(new JLabel("Sin Jugadores"));
 
         if (!Ranking.getInstance().getRankingView().isEmpty()) {
             int pSize = Ranking.getInstance().getRankingView().size();
@@ -69,11 +59,11 @@ public class RankingWindow extends JFrame {
             for (int i = 0; i < pSize; i++) {
                 String name = Ranking.getInstance().getRankingView().getEntradaJugador(i).getNombreJugador();
                 int puntaje = Ranking.getInstance().getRankingView().getEntradaJugador(i).getPuntaje();
-                rankings.add(new JLabel(name));
-                rankings.add(new JLabel(String.valueOf(puntaje)));
+                rankings.add(new JLabel(name + ": ", SwingConstants.RIGHT));
+                rankings.add(new JLabel(" " + puntaje));
             }
             this.add(rankings);
-        } else this.add(new JLabel("Sin Jugadores"));
+        } else this.add(new JLabel("Sin Jugadores", SwingConstants.CENTER));
 
         this.add(backbtn);
 

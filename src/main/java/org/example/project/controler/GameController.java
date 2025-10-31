@@ -3,7 +3,6 @@ package org.example.project.controler;
 import org.example.project.models.Entity;
 import org.example.project.models.enemies.EnemyShips;
 import org.example.project.models.extras.AreaDeJuego;
-import org.example.project.models.extras.Vector2;
 import org.example.project.models.objects.Proyectile;
 import org.example.project.models.objects.Wall;
 import org.example.project.models.others.Difficulty;
@@ -45,11 +44,7 @@ public class GameController {
     public int moverNaveIzquierda(){
         return nave.moverIzquierda();
     }
-    /*
-    public Vector2 moverEntidad (){
 
-    }
-    */
     public void setDifficulty(Difficulty difficulty){
         selectedDifficulty = difficulty;
     }

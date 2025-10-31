@@ -1,17 +1,18 @@
 package org.example.project.controler;
 
+import org.example.project.models.Ranking;
+import org.example.project.models.player.LifeTracker;
 import org.example.project.models.player.ScoreTracker;
-import org.example.project.views.views.PlayerView;
 
 public class PlayerController {
 
     private static PlayerController instance;
     private ScoreTracker scoreTracker;
-    private PlayerView view;
+    private LifeTracker lifeTracker;
 
     private PlayerController() {
         scoreTracker = new ScoreTracker();
-        view = new PlayerView(scoreTracker.getScore());
+        lifeTracker = new LifeTracker(3);
     }
 
     public static PlayerController getInstance() {
@@ -23,17 +24,31 @@ public class PlayerController {
 
     public void addScore(int score){
         scoreTracker.setScore(scoreTracker.getScore() + score);
-        view.setScore(scoreTracker.getScore());
         System.out.println("Score: " + scoreTracker.getScore());
     }
 
     public void resetScore(){
         scoreTracker.setScore(0);
-        view.setScore(0);
     }
 
-    public PlayerView getView() {
-        return view;
+    public int getLifes() {
+        return lifeTracker.getLifes();
+    }
+
+    public void addLifes(int quantity) {
+        if(getLifes() == 0 && quantity < 0) {
+            gameOver();
+        } else
+            lifeTracker.setLifes(quantity + getLifes());
+    }
+
+    public int getScore(){
+        return scoreTracker.getScore();
+    }
+
+    public void gameOver() {
+
+        System.out.println("U ded");
     }
 
 

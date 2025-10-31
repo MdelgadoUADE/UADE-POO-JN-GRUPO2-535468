@@ -1,5 +1,7 @@
 package org.example.project.views.windows;
 
+import org.example.project.models.Ranking;
+import org.example.project.views.modals.RankingAskModal;
 import org.example.project.views.panels.DifficultyPanel;
 import org.example.project.views.panels.GamePanelPlayer;
 import org.example.project.views.panels.GamePanelPC;
@@ -12,7 +14,7 @@ public class GameWindow extends JFrame {
     private GamePanelPC panelPC;
     private DifficultyPanel panelDificultad;
 
-    int ancho = 400;
+    int ancho = 420;
     int altoJugador = 120; // altura del panel de la nave
     int altoPC = 400;      // altura del panel de proyectiles
 
@@ -20,19 +22,12 @@ public class GameWindow extends JFrame {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //DEJAR EN DO_NOTHING_ON_CLOSE PARA EVITAR CERRAR EL JUEGO
         setLayout(new BorderLayout());
 
-        //todo añadir aca la llamada a GameController para controlar la dificultad
         panelDificultad = new DifficultyPanel(ancho, altoPC, this);
         add(BorderLayout.CENTER, panelDificultad);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
 
-        /*
-        configurarPanelJugador();
-        pack();
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        setVisible(true);
-        */
     }
     public void setGamePanel() {
         remove(panelDificultad);
@@ -46,6 +41,11 @@ public class GameWindow extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public void endGameWindow() {
+        Ranking.getInstance().addEntrada(new RankingAskModal(GameWindow.this).getName());
+        this.dispose();
     }
 
 }
