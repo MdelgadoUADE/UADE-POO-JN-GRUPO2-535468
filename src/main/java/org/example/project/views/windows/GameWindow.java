@@ -1,5 +1,7 @@
 package org.example.project.views.windows;
 
+import org.example.project.controler.PlayerController;
+import org.example.project.interfaces.GameListener;
 import org.example.project.models.Ranking;
 import org.example.project.views.modals.RankingAskModal;
 import org.example.project.views.panels.DifficultyPanel;
@@ -9,7 +11,8 @@ import org.example.project.views.panels.GamePanelPC;
 import javax.swing.*;
 import java.awt.*;
 
-public class GameWindow extends JFrame {
+public class GameWindow extends JFrame implements GameListener {
+    private JFrame previousFrame;
     private GamePanelPlayer panelJugador;
     private GamePanelPC panelPC;
     private DifficultyPanel panelDificultad;
@@ -18,7 +21,9 @@ public class GameWindow extends JFrame {
     int altoJugador = 120; // altura del panel de la nave
     int altoPC = 400;      // altura del panel de proyectiles
 
-    public GameWindow(){
+    public GameWindow(JFrame previousFrame){
+        PlayerController.getInstance().addListener(this);
+        this.previousFrame = previousFrame;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //DEJAR EN DO_NOTHING_ON_CLOSE PARA EVITAR CERRAR EL JUEGO
         setLayout(new BorderLayout());
 
@@ -43,9 +48,15 @@ public class GameWindow extends JFrame {
         setVisible(true);
     }
 
-    public void endGameWindow() {
-        Ranking.getInstance().addEntrada(new RankingAskModal(GameWindow.this).getName());
+    @Override
+    public void onGameOver() {
+        String name = new RankingAskModal(this).getName();
+        if (name != null){
+            Ranking.getInstance().addEntrada(name);
+        } else new RankingAskModal(this).showWarning();
+
+        PlayerController.getInstance().removeListener(this);
+        previousFrame.setVisible(true);
         this.dispose();
     }
-
 }

@@ -1,6 +1,7 @@
 package org.example.project.views.panels;
 
 import org.example.project.controler.GameController;
+import org.example.project.controler.PlayerController;
 import org.example.project.views.imgs.ProyectileImg;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class GamePanelPC extends JPanel {
 
             if (GameController.getInstancia().checkShipHealth()){
                 ((Timer) e.getSource()).stop();
-                // finalizar juego porq estoy muerto.
+                PlayerController.getInstance().addLifes(-1);
+                //if (PlayerController.getInstance().getLifes() == 0)
             }
 
             for (int i = 0; i < proyectilesJugador.size(); i++) {
