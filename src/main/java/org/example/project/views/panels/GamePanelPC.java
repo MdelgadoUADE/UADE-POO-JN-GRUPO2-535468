@@ -28,7 +28,6 @@ public class GamePanelPC extends JPanel {
             if (GameController.getInstancia().checkShipHealth()){
                 ((Timer) e.getSource()).stop();
                 PlayerController.getInstance().addLifes(-1);
-                //if (PlayerController.getInstance().getLifes() == 0)
             }
 
             for (int i = 0; i < proyectilesJugador.size(); i++) {

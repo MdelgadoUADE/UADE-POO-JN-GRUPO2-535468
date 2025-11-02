@@ -30,7 +30,7 @@ public class PlayerController {
     }
 
     public void addScore(int score){
-        scoreTracker.setScore(scoreTracker.getScore() + score);
+        if (scoreTracker.setScore(scoreTracker.getScore() + score)) addLifes(1);
         System.out.println("Score: " + scoreTracker.getScore());
     }
 
