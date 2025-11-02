@@ -2,7 +2,7 @@ package org.example.project.views.panels;
 
 import org.example.project.controler.GameController;
 import org.example.project.controler.PlayerController;
-import org.example.project.views.imgs.ProyectileImg;
+import org.example.project.views.imgs.ProyectileUpImg;
 import org.example.project.models.Entity;
 import org.example.project.views.imgs.ProyectileDownImg;
 
