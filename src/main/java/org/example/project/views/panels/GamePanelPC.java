@@ -1,6 +1,8 @@
 package org.example.project.views.panels;
 
 import org.example.project.controler.GameController;
+import org.example.project.controler.PlayerController;
+import org.example.project.views.imgs.ProyectileImg;
 import org.example.project.models.Entity;
 import org.example.project.views.imgs.ProyectileDownImg;
 
@@ -16,7 +18,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import java.awt.*;
-
 
 public class GamePanelPC extends JPanel {
     private List<ProyectileDownImg> proyectilesEnemigos;
@@ -36,7 +37,7 @@ public class GamePanelPC extends JPanel {
 
             if (GameController.getInstancia().checkShipHealth()){
                 ((Timer) e.getSource()).stop();
-                // finalizar juego porq estoy muerto.
+                PlayerController.getInstance().addLifes(-1);
             }
 
             //MoverBalas
@@ -50,11 +51,7 @@ public class GamePanelPC extends JPanel {
             //Checkear Healths Joaco
             //GameController.getInstancia().checkearHealth();
         });
-
         timer.start();
-
-
-
     }
 
     public void crearProyectil(int centroNaveX) {

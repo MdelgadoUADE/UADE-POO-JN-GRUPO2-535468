@@ -27,7 +27,7 @@ public class Ranking {
         jugadores.add(
                 new EntradaJugador(
                         nombre,
-                        PlayerController.getInstance().getView().getScore()
+                        PlayerController.getInstance().getScore()
         ));
         PlayerController.getInstance().resetScore();
     }

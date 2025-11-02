@@ -36,7 +36,7 @@ public class StartWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                GameWindow gw = new GameWindow();
+                GameWindow gw = new GameWindow(StartWindow.this);
                 StartWindow.super.setVisible(false);
 
                 gw.addWindowListener(new WindowAdapter() {
