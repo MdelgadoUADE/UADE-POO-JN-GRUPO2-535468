@@ -13,7 +13,7 @@ public class ProyectileDownImg extends JLabel {
         this.id = id;
         ancho = 50;
         alto = 50;
-        Image imagen = new ImageIcon("proyectileUp.png").getImage();
+        Image imagen = new ImageIcon("proyectileDown.png").getImage();
         Image imagenEscala = imagen.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(imagenEscala));
         setSize(ancho, alto); // muy importante para que Swing sepa el tamaño
@@ -21,7 +21,7 @@ public class ProyectileDownImg extends JLabel {
 
     public void mover(int nuevaX, int nuevaY) {
         setLocation(nuevaX, nuevaY);
-        System.out.println("Se movió imagen a X=" + nuevaX + " Y=" + nuevaY);
+        System.out.println("Se movió imagen pryectil enemigo a X=" + nuevaX + " Y=" + nuevaY);
     }
 
     // GETTERS

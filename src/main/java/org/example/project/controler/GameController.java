@@ -25,6 +25,10 @@ public class GameController {
     private List<Proyectile> proyectilesEnemigos;
     private PlayerShip nave;
     private AreaDeJuego area;
+    private final Random random = new Random();
+    private long ultimoDisparo = 0;
+    private static final int TIEMPO_ENTRE_DISPAROS = 2000;
+
 
     private GameController(){
         area = new AreaDeJuego(400, 400);
@@ -47,6 +51,7 @@ public class GameController {
     public int moverNaveIzquierda(){
         return nave.moverIzquierda();
     }
+
     public int crearProyectilJugador(){
         int centroNave = centroEntity(nave.getView());
         Proyectile p = new Proyectile(centroNave, area.getAlto(), -5,50,50,area);
@@ -54,16 +59,41 @@ public class GameController {
         return p.getId();
     }
 
+    public  int crearEnemigoJugador(){
+        System.out.println("crearEnemigoJugador controlador");
+        EnemyShips e = new EnemyShips(0,0,1,50,50,area);
+        enemyShips.add(e);
+        return  e.getId();
+    }
+
+    public Vector2 moverNaveEnemiga(int idNave) {
+        Vector2 v = new Vector2(0, 0);
+
+        for (int i = 0; i < enemyShips.size(); i++) {
+            if (idNave == enemyShips.get(i).getId()) {
+                v = enemyShips.get(i).mover();
+
+                if (v.getY() > area.getAlto()) {
+                    System.out.println("Eliminando nave enemiga id=" + idNave);
+                    enemyShips.remove(i);
+                }
+                return v;
+            }
+        }
+        return v;
+    }
+
     public int crearProyectilEnemigo(int idNave){
         EntityView e = buscarNaveEnemigo(idNave);
         int centroNave = centroEntity(e);
-        int y = e.getArea().getAlto() + e.getPosition().getY();
+        int y = e.getAreaObjeto().getAlto() + e.getPosition().getY();
         Proyectile p = new Proyectile(centroNave, y, 5,50,50,area);
+        proyectilesEnemigos.add(p);
         return p.getId();
     }
 
     public int centroEntity(EntityView entity){
-        return nave.getPosition().getX() + nave.getArea().getAlto()/ 2;
+        return entity.getPosition().getX() + entity.getAreaObjeto().getAncho() / 2;
     }
 
 
@@ -85,6 +115,15 @@ public class GameController {
         return null;
     }
 
+    public EntityView buscarProyectilEnemigo(int idProyectil){
+        for (int i = 0; i < proyectilesEnemigos.size(); i++) {
+            if (idProyectil == proyectilesEnemigos.get(i).getId()){
+                return proyectilesEnemigos.get(i).getView();
+            }
+        }
+        return null;
+    }
+
     public int moverProyectil(int idProyectil){
         for (int i = 0; i < proyectilesJugador.size(); i++) {
             if (idProyectil == proyectilesJugador.get(i).getId()){
@@ -98,18 +137,34 @@ public class GameController {
         return 0;
     }
 
-
-
-    public int asignarDisparo(){
-
-        Random r = new Random();
-        int disparar =  r.nextInt(2);
-        if (disparar == 2){
-            int i =  r.nextInt(enemyShips.size()-1);
-            return enemyShips.get(i).getId();
+    public int moverProyectilEnemigo(int idProyectil){
+        for (int i = 0; i < proyectilesEnemigos.size(); i++) {
+            if (idProyectil == proyectilesEnemigos.get(i).getId()){
+                System.out.println("Se mueve");
+                int nuevaY = proyectilesEnemigos.get(i).mover();
+                if (nuevaY > area.getAlto()) {
+                    proyectilesEnemigos.remove(proyectilesEnemigos.get(i));
+                }
+                return nuevaY;
+            }
         }
         return 0;
     }
+
+    public int asignarDisparo() {
+        long ahora = System.currentTimeMillis();
+        if (ahora - ultimoDisparo >= TIEMPO_ENTRE_DISPAROS && !enemyShips.isEmpty()) {
+            if (random.nextDouble() < 0.10) {
+                ultimoDisparo = ahora;
+                int i = random.nextInt(enemyShips.size());
+                int id = enemyShips.get(i).getId();
+                System.out.println("Enemigo " + id + " dispara");
+                return id;
+            }
+        }
+        return 0;
+    }
+
     public void setDifficulty(Difficulty difficulty){
         selectedDifficulty = difficulty;
     }

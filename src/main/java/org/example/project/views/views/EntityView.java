@@ -20,8 +20,9 @@ public class EntityView {
         this.velocidad = velocidad;
         this.id = id;
         this.health = health;
-        this.areaObjeto = area;
+        this.area = area;
     }
+
 
     //GETTERS
     public int getId() {return id;}

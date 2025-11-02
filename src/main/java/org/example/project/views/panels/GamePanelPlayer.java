@@ -20,7 +20,7 @@ public class GamePanelPlayer extends JPanel {
         setBackground(Color.BLACK);
 
         imagenNave = new ShipImg();
-        // colocar nave centrada horizontalmente
+        // nave centrada horizontalmente
         int xInicial = (ancho - imagenNave.getAncho()) / 2;
         int yInicial = (alto - imagenNave.getAlto()) / 2;
         imagenNave.setBounds(xInicial, yInicial, imagenNave.getAncho(), imagenNave.getAlto());

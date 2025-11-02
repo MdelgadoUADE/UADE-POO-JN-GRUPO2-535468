@@ -1,9 +1,9 @@
 package org.example.project.views.panels;
 
 import org.example.project.controler.GameController;
-import org.example.project.controler.PlayerController;
-import org.example.project.views.imgs.ProyectileUpImg;
 import org.example.project.models.Entity;
+import org.example.project.models.extras.Vector2;
+import org.example.project.views.imgs.EnemyShipImg;
 import org.example.project.views.imgs.ProyectileDownImg;
 
 import org.example.project.views.imgs.ProyectileUpImg;
@@ -19,11 +19,16 @@ import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class GamePanelPC extends JPanel {
+    private List<EnemyShipImg> enemiesShips;
     private List<ProyectileDownImg> proyectilesEnemigos;
     private List<ProyectileUpImg> proyectilesJugador;
     private int anchoPanel;
     private int altoPanel;
+    private int contadorNavesCreadas;
+    private final int TOTAL_NAVES = 15;
+    private final int DISTANCIA_MINIMA_PARA_NUEVA = 80;
 
     public GamePanelPC(int ancho, int alto) {
         this.anchoPanel = ancho;
@@ -32,26 +37,48 @@ public class GamePanelPC extends JPanel {
         setPreferredSize(new Dimension(ancho, alto));
         setBackground(Color.DARK_GRAY);
         proyectilesJugador = new ArrayList<>();
+        enemiesShips = new ArrayList<>();
+        proyectilesEnemigos = new ArrayList<>();
+
+        contadorNavesCreadas = 0;
+        // Crear la primera nave inicial
+        crearNaveEnemiga();
+        contadorNavesCreadas++;
+
         Timer timer = new Timer(10, e -> {
             //Mover Balas
 
             if (GameController.getInstancia().checkShipHealth()){
                 ((Timer) e.getSource()).stop();
-                PlayerController.getInstance().addLifes(-1);
+                // finalizar juego porq estoy muerto.
             }
 
+            //Crear Naves
+            if (contadorNavesCreadas < TOTAL_NAVES && ultimaNaveSeMovioSuficiente()) {
+                crearNaveEnemiga();
+                contadorNavesCreadas++;
+            }
             //MoverBalas
             moverProyectilesJugador();
-
-
+            moverProyectilesEnemigos();
             //Mover Naves Kiara
-            //GameController.getInstancia().moveEntitys();
+            moverNaveEnemigo();
+            //Disparo Enemigo
+            int id = GameController.getInstancia().asignarDisparo();
+            if (id!=0){
+                crearProyectilEnemigo(id);
+            }
+
             //Checkear colicones Seba
             GameController.getInstancia().checkCollisions();
             //Checkear Healths Joaco
             //GameController.getInstancia().checkearHealth();
         });
+
         timer.start();
+
+
+
     }
 
     public void crearProyectil(int centroNaveX) {
@@ -77,8 +104,8 @@ public class GamePanelPC extends JPanel {
 
         int centroNaveX = GameController.getInstancia().centroEntity(e);
         int xAjustado = centroNaveX - p.getAncho() / 2;
-        int yInicial = altoPanel - p.getAlto(); // justo en el borde inferior del panel
-        //System.out.println("xAjustado=" + xAjustado +  " yInicial=" + yInicial + " ancho=" + anchoPanel + " alto=" + altoPanel);
+        int yInicial = e.getPosition().getY() + e.getAreaObjeto().getAlto();
+
         p.setBounds(xAjustado, yInicial, p.getAncho(), p.getAlto());
         add(p);
         proyectilesEnemigos.add(p);
@@ -95,6 +122,53 @@ public class GamePanelPC extends JPanel {
                 repaint();
             } else {
                 p.mover(p.getX(), nuevaY);
+            }
+        }
+    }
+    public void moverProyectilesEnemigos(){
+        for (int i = 0; i < proyectilesEnemigos.size(); i++) {
+            ProyectileDownImg p = proyectilesEnemigos.get(i);
+            int nuevaY = GameController.getInstancia().moverProyectilEnemigo(p.getId());
+            if (nuevaY > altoPanel) {
+                remove(p);
+                proyectilesEnemigos.remove(p);
+                repaint();
+            } else {
+                p.mover(p.getX(), nuevaY);
+            }
+        }
+    }
+
+    public void crearNaveEnemiga(){
+        int idNave = GameController.getInstancia().crearEnemigoJugador();
+        EnemyShipImg nave = new EnemyShipImg(idNave);
+        int xInicial = 0;
+        int yInicial = 0;
+        nave.setBounds(xInicial, yInicial, nave.getAncho(), nave.getAlto());
+        add(nave);
+        enemiesShips.add(nave);
+
+        System.out.println("Nave enemiga creada en X=" + xInicial + ", Y=" + yInicial);
+        revalidate();
+        repaint();
+    }
+    private boolean ultimaNaveSeMovioSuficiente() {
+        if (enemiesShips.isEmpty()) return false;
+
+        EnemyShipImg ultima = enemiesShips.get(enemiesShips.size() - 1);
+        return ultima.getX() >= DISTANCIA_MINIMA_PARA_NUEVA;
+    }
+
+    public void moverNaveEnemigo(){
+        for (int i = 0; i < enemiesShips.size(); i++) {
+            EnemyShipImg e = enemiesShips.get(i);
+            Vector2 nuevoV = GameController.getInstancia().moverNaveEnemiga(e.getId());
+            if (nuevoV.getY() > altoPanel){
+                remove(e);
+                enemiesShips.remove(e);
+                repaint();
+            } else {
+                e.mover(nuevoV.getX(), nuevoV.getY());
             }
         }
     }
