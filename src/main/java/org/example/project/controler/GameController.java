@@ -23,6 +23,7 @@ public class GameController {
     private List<EnemyShips> enemyShips;
     private List<Proyectile> proyectilesJugador;
     private List<Proyectile> proyectilesEnemigos;
+
     private PlayerShip nave;
     private AreaDeJuego area;
     private final Random random = new Random();
@@ -64,6 +65,13 @@ public class GameController {
         EnemyShips e = new EnemyShips(0,0,1,50,50,area);
         enemyShips.add(e);
         return  e.getId();
+    }
+
+    public  int crearWall(int x, int y,int ancho, int alto){
+        System.out.println(" creando muro");
+        Wall w = new Wall(x,y,ancho,alto,area);
+        walls.add(w);
+        return  w.getId();
     }
 
     public Vector2 moverNaveEnemiga(int idNave) {
@@ -180,14 +188,16 @@ public class GameController {
             //Caso bala propia contra muro y contra nave enemiga
             for ( Proyectile bala : proyectilesJugador){
                 for (Wall muro : walls){
-                    boolean res = collision(bala , muro);
-                    if (res){
+
+                    if (collision(bala , muro)){
+                        System.out.println("se detecto colision");
                         muro.setDamage(2);
                     }
                 }
                 for (EnemyShips naveEnemiga : enemyShips){
-                    boolean res = collision(bala , naveEnemiga);
-                    if (res){
+
+                    if (collision(bala , naveEnemiga)){
+                        System.out.println("se detecto colision");
                         naveEnemiga.setDamage(1);
                     }
                 }
@@ -200,14 +210,15 @@ public class GameController {
             //caso bala enemiga contra muro y nave propia
             for ( Proyectile bala : proyectilesEnemigos){
                 for (Wall muro : walls){
-                    boolean res = collision(bala , muro);
-                    if (res){
+                    if (collision(bala , muro)){
+                        System.out.println("se detecto colision");
                         muro.setDamage(1);
 
                     }
                 }
 
-                if( collision(bala,nave)){
+                if( collisionNave(bala,nave)){
+                    System.out.println("se detecto colision");
                     nave.setDamage(1);
                 }
             }
@@ -216,7 +227,7 @@ public class GameController {
 
     }
 
-     private boolean collision(Entity entity1, Entity entity2){
+    private boolean collision(Entity entity1, Entity entity2){
 
         // revisar como validar areas
         int x1 = entity1.getPosition().getX();
@@ -228,7 +239,7 @@ public class GameController {
         int e2Ancho= entity2.getArea().getAncho();
         int e2Alto=entity2.getArea().getAlto();
 
-         System.out.println("se detecto colision");
+
         // caso de colision
         return(x1 < x2+e2Ancho &&
                 x1 + e1Ancho > x2 &&
@@ -236,6 +247,20 @@ public class GameController {
                 y1 + e1Alto > y2);
     }
 
+    private boolean collisionNave(Entity entity1, Entity entity2){
+        int x1 = entity1.getPosition().getX();
+        int y1= entity1.getPosition().getY();
+        int x2 = entity2.getPosition().getX();
+        int y2= entity2.getPosition().getY();
+        int e1Ancho= entity1.getArea().getAncho();
+        int e1Alto=entity1.getArea().getAlto();
+        int e2Ancho= entity2.getArea().getAncho();
+        int e2Alto=entity2.getArea().getAlto();
+        // caso de colision
+        return(x1 < x2+e2Ancho &&
+                x1 + e1Ancho > x2 &&
+                y1 == area.getAlto()-e1Alto);
+    }
 
     public boolean checkShipHealth(){
         return nave.getHealth()<=0;
