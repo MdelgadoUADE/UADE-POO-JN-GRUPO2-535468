@@ -20,6 +20,7 @@ public class Proyectile extends Entity {
         this.health =1;
         this.area=area;
         this.id=contador;
+        this.delete=false;
         contador++;
         System.out.println("NEW Proyectil x: "+ this.position.getX() +" y: "+ this.position.getY() + "velocidad: "+ this.velocidad);
     }

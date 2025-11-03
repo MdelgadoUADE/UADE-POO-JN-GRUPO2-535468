@@ -192,6 +192,7 @@ public class GameController {
                     if (collision(bala , muro)){
                         System.out.println("se detecto colision");
                         muro.setDamage(2);
+                        bala.setDelete();
                     }
                 }
                 for (EnemyShips naveEnemiga : enemyShips){
@@ -199,6 +200,7 @@ public class GameController {
                     if (collision(bala , naveEnemiga)){
                         System.out.println("se detecto colision");
                         naveEnemiga.setDamage(1);
+                        bala.setDelete();
                     }
                 }
             }
@@ -213,6 +215,7 @@ public class GameController {
                     if (collision(bala , muro)){
                         System.out.println("se detecto colision");
                         muro.setDamage(1);
+                        bala.setDelete();
 
                     }
                 }
@@ -220,6 +223,7 @@ public class GameController {
                 if( collisionNave(bala,nave)){
                     System.out.println("se detecto colision");
                     nave.setDamage(1);
+                    bala.setDelete();
                 }
             }
         }
@@ -264,5 +268,19 @@ public class GameController {
 
     public boolean checkShipHealth(){
         return nave.getHealth()<=0;
+    }
+
+    public void limpiar(){
+        limpiarBalasEnemigo();
+        limpiarBalasJugador();
+
+    }
+    private void limpiarBalasEnemigo(){
+        // borra de la lista las balas que ya colisionaron
+        proyectilesEnemigos.removeIf(bala -> bala.isDelete());
+    }
+    private void limpiarBalasJugador(){
+        // borra de la lista las balas que ya colisionaron
+        proyectilesJugador.removeIf(bala -> bala.isDelete());
     }
 }

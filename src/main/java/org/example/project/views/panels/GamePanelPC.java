@@ -25,7 +25,7 @@ public class GamePanelPC extends JPanel {
     private final int TOTAL_NAVES = 15;
     private static final int ANCHO_MURO = 70;
     private static final int ALTO_MURO = 40;
-    private static final int ESPACIO_HORIZONTAL = 10; // <-- El espacio
+    private static final int ESPACIO_HORIZONTAL = 100; // <-- El espacio
 
 
     private final int DISTANCIA_MINIMA_PARA_NUEVA = 80;
@@ -74,13 +74,40 @@ public class GamePanelPC extends JPanel {
 
             //Checkear colicones Seba
             GameController.getInstancia().checkCollisions();
+
             //Checkear Healths Joaco
             //GameController.getInstancia().checkearHealth();
+
+            //Eliminar elementos
+            GameController.getInstancia().limpiar();
+            sincronizarVistaModelo();
+            repaint();
+
         });
 
         timer.start();
 
 
+
+    }
+    //Metodo utilizado para sincronizar las views con la logica de negocio y saber si eliminar o no
+    private void sincronizarVistaModelo() {
+
+        proyectilesEnemigos.removeIf(balaImg -> {
+            if(GameController.getInstancia().buscarProyectilEnemigo(balaImg.getId())==null){
+                remove(balaImg);
+                return true;
+            }
+            return false;
+        } );
+
+        proyectilesJugador.removeIf(balaImg -> {
+            if(GameController.getInstancia().buscarProyectilJugador(balaImg.getId())==null){
+                remove(balaImg);
+                return true;
+            }
+            return false;
+        } );
 
     }
 

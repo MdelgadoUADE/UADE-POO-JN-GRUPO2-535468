@@ -15,6 +15,7 @@ public class Wall extends Entity {
         this.health = 4;
         this.area=area;
         contador++;
+        this.delete=false;
 
     }
 

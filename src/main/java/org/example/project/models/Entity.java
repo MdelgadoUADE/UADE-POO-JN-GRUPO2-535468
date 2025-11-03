@@ -8,6 +8,7 @@ public class Entity {
     protected int health;
     protected AreaDeJuego areaObjeto;
     protected AreaDeJuego area;
+    protected boolean delete;
 
 
     public Vector2 getPosition() {
@@ -28,5 +29,12 @@ public class Entity {
     public  void setDamage(int damage){this.setHealth(this.getHealth()-damage);}
     public AreaDeJuego getArea() {
         return areaObjeto;
+    }
+    public void setDelete(){
+        this.delete =true;
+    }
+
+    public boolean isDelete() {
+        return delete;
     }
 }
