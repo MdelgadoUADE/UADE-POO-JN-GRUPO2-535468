@@ -132,6 +132,17 @@ public class GameController {
         return null;
     }
 
+    public EntityView buscarWall(int idProyectil){
+        for (int i = 0; i < walls.size(); i++) {
+            if (idProyectil == walls.get(i).getId()){
+                return walls.get(i).getView();
+            }
+        }
+        return null;
+    }
+
+
+
     public int moverProyectil(int idProyectil){
         for (int i = 0; i < proyectilesJugador.size(); i++) {
             if (idProyectil == proyectilesJugador.get(i).getId()){
@@ -192,6 +203,7 @@ public class GameController {
                     if (collision(bala , muro)){
                         System.out.println("se detecto colision");
                         muro.setDamage(2);
+                        bala.setDelete();
                     }
                 }
                 for (EnemyShips naveEnemiga : enemyShips){
@@ -199,6 +211,7 @@ public class GameController {
                     if (collision(bala , naveEnemiga)){
                         System.out.println("se detecto colision");
                         naveEnemiga.setDamage(1);
+                        bala.setDelete();
                     }
                 }
             }
@@ -213,6 +226,7 @@ public class GameController {
                     if (collision(bala , muro)){
                         System.out.println("se detecto colision");
                         muro.setDamage(1);
+                        bala.setDelete();
 
                     }
                 }
@@ -220,6 +234,7 @@ public class GameController {
                 if( collisionNave(bala,nave)){
                     System.out.println("se detecto colision");
                     nave.setDamage(1);
+                    bala.setDelete();
                 }
             }
         }
@@ -264,5 +279,31 @@ public class GameController {
 
     public boolean checkShipHealth(){
         return nave.getHealth()<=0;
+    }
+
+    public void limpiar(){
+        limpiarBalasEnemigo();
+        limpiarBalasJugador();
+        limpiarMuros();
+        limpiarNavesEnemigas();
+
+
+    }
+
+    private void limpiarNavesEnemigas() {
+        enemyShips.removeIf(naveEnemiga -> naveEnemiga.getHealth()<=0);
+    }
+
+    private void limpiarMuros() {
+        walls.removeIf(muro -> muro.getHealth()<=0);
+    }
+
+    private void limpiarBalasEnemigo(){
+        // borra de la lista las balas que ya colisionaron
+        proyectilesEnemigos.removeIf(bala -> bala.isDelete());
+    }
+    private void limpiarBalasJugador(){
+        // borra de la lista las balas que ya colisionaron
+        proyectilesJugador.removeIf(bala -> bala.isDelete());
     }
 }

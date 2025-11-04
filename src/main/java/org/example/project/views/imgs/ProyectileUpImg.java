@@ -11,7 +11,7 @@ public class ProyectileUpImg extends JLabel {
     public ProyectileUpImg(int id) {
         //System.out.println("Constructor Imagen Proyectil");
         this.id = id;
-        ancho = 50;
+        ancho = 10;
         alto = 50;
         Image imagen = new ImageIcon("proyectileUp.png").getImage();
         Image imagenEscala = imagen.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);

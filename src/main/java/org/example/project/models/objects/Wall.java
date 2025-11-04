@@ -3,6 +3,7 @@ package org.example.project.models.objects;
 import org.example.project.models.Entity;
 import org.example.project.models.extras.AreaDeJuego;
 import org.example.project.models.extras.Vector2;
+import org.example.project.views.views.EntityView;
 
 public class Wall extends Entity {
     private static int contador = 0;
@@ -15,7 +16,11 @@ public class Wall extends Entity {
         this.health = 4;
         this.area=area;
         contador++;
+        this.delete=false;
 
+    }
+    public EntityView getView() {
+        return new EntityView(areaObjeto,position,area,0,id,health);
     }
 
     public int getId() {

@@ -19,6 +19,7 @@ public class EnemyShips extends Entity {
         this.velocidad=velocidad;
         contador++;
         this.id=contador;
+        this.delete=false;
     }
 
     public EntityView getView() {
