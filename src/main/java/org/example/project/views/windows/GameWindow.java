@@ -40,6 +40,9 @@ public class GameWindow extends JFrame implements GameListener {
         panelPC = new GamePanelPC(ancho, altoPC);
         panelJugador = new GamePanelPlayer(ancho, altoJugador, panelPC);
 
+        panelJugador.updateScore(PlayerController.getInstance().getScore());
+        panelJugador.updateLifes(PlayerController.getInstance().getLifes());
+
         add(panelPC, BorderLayout.CENTER);
         add(panelJugador, BorderLayout.SOUTH);
 
@@ -58,5 +61,15 @@ public class GameWindow extends JFrame implements GameListener {
         PlayerController.getInstance().removeListener(this);
         previousFrame.setVisible(true);
         this.dispose();
+    }
+
+    @Override
+    public void onScoreChange(int score) {
+        panelJugador.updateScore(score);
+    }
+
+    @Override
+    public void onLifeChange(int life) {
+        panelJugador.updateLifes(life);
     }
 }

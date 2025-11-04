@@ -1,11 +1,9 @@
 package org.example.project.controler;
 
 import org.example.project.interfaces.GameListener;
-import org.example.project.models.Ranking;
 import org.example.project.models.player.LifeTracker;
 import org.example.project.models.player.ScoreTracker;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +28,7 @@ public class PlayerController {
     }
 
     public void addScore(int score){
+        notifyScoreChange(getScore() + score);
         if (scoreTracker.setScore(scoreTracker.getScore() + score)) addLifes(1);
         System.out.println("Score: " + scoreTracker.getScore());
     }
@@ -43,10 +42,12 @@ public class PlayerController {
     }
 
     public void addLifes(int quantity) {
+        notifyLifeChange(getLifes() + quantity);
         if(getLifes() == 0 && quantity < 0) {
             notifyGameOver();
         } else
             lifeTracker.setLifes(quantity + getLifes());
+
     }
 
     public int getScore(){
@@ -54,10 +55,10 @@ public class PlayerController {
     }
 
     // logica de patron observer
-
     public void addListener(GameListener listener) {
         listeners.add(listener);
     }
+
     public void removeListener(GameListener listener) {
         listeners.remove(listener);
     }
@@ -68,7 +69,15 @@ public class PlayerController {
         }
     }
 
+    private void notifyLifeChange(int quantity) {
+        for (GameListener listener : listeners) {
+            listener.onLifeChange(quantity);
+        }
+    }
 
-
-
+    private void notifyScoreChange(int quantity){
+        for (GameListener listener : listeners) {
+            listener.onScoreChange(quantity);
+        }
+    }
 }

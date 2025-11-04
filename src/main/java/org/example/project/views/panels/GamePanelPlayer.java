@@ -1,6 +1,7 @@
 package org.example.project.views.panels;
 
 import org.example.project.controler.PlayerController;
+import org.example.project.views.imgs.LifeImg;
 import org.example.project.views.imgs.ShipImg;
 import org.example.project.controler.GameController;
 import javax.swing.*;
@@ -11,6 +12,9 @@ import java.awt.event.KeyEvent;
 public class GamePanelPlayer extends JPanel {
     private ShipImg imagenNave;
     private GamePanelPC panelPC;
+    private JLabel playerScoreLabel;
+    private JLabel playerLifesLabel;
+    private LifeImg lifeImg;
 
     public GamePanelPlayer(int ancho, int alto, GamePanelPC panelPC) {
         this.panelPC = panelPC;
@@ -20,11 +24,22 @@ public class GamePanelPlayer extends JPanel {
         setBackground(Color.BLACK);
 
         imagenNave = new ShipImg();
+        lifeImg = new LifeImg();
+        playerScoreLabel = new JLabel("0");
+        playerLifesLabel = new JLabel("0");
+
         // nave centrada horizontalmente
         int xInicial = (ancho - imagenNave.getAncho()) / 2;
         int yInicial = (alto - imagenNave.getAlto()) / 2;
         imagenNave.setBounds(xInicial, yInicial, imagenNave.getAncho(), imagenNave.getAlto());
+        playerScoreLabel.setBounds(ancho - ancho / 5, alto - alto / 2, 100, 50);
+        lifeImg.setBounds(ancho / 20, alto - alto / 2, 40, 40 );
+        playerLifesLabel.setBounds(ancho / 7, alto - alto / 2, 50, 50);
+
         add(imagenNave);
+        add(playerScoreLabel);
+        add(lifeImg);
+        add(playerLifesLabel);
 
         setFocusable(true);
         requestFocusInWindow();
@@ -57,6 +72,13 @@ public class GamePanelPlayer extends JPanel {
                 }
             }
         });
+    }
+
+    public void updateLifes(int lifes){
+        playerLifesLabel.setText(String.valueOf(lifes));
+    }
+    public void updateScore(int score){
+        playerScoreLabel.setText("Score: " + score);
     }
 
     @Override
