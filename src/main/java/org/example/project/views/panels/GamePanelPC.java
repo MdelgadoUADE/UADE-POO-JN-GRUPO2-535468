@@ -82,7 +82,6 @@ public class GamePanelPC extends JPanel {
             GameController.getInstancia().limpiar();
             sincronizarVistaModelo();
             repaint();
-
         });
 
         timer.start();
@@ -108,6 +107,23 @@ public class GamePanelPC extends JPanel {
             }
             return false;
         } );
+
+        walls.removeIf(wallImg -> {
+            if(GameController.getInstancia().buscarWall(wallImg.getId())==null){
+                remove(wallImg);
+                return true;
+            }
+            return false;
+        } );
+
+        enemiesShips.removeIf(enemyShipImg -> {
+            if(GameController.getInstancia().buscarNaveEnemigo(enemyShipImg.getId())==null){
+                remove(enemyShipImg);
+                return true;
+            }
+            return false;
+        } );
+
 
     }
 
@@ -224,6 +240,8 @@ public class GamePanelPC extends JPanel {
             }
         }
     }
-
-
 }
+
+
+
+

@@ -11,8 +11,6 @@ public class WallImg  extends JLabel {
     public WallImg(int id){
         this.id=id;
         System.out.println("Constructor Imagen wall");
-        //setOpaque(true);
-        //setBackground(Color.RED);
         Image imagen = new ImageIcon("wall2.png").getImage();
         Image imagenEscala = imagen.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(imagenEscala));
@@ -25,5 +23,9 @@ public class WallImg  extends JLabel {
 
     public int getAlto() {
         return alto;
+    }
+
+    public int getId() {
+        return id;
     }
 }
