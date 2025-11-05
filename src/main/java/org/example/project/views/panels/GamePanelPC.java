@@ -1,6 +1,7 @@
 package org.example.project.views.panels;
 
 import org.example.project.controler.GameController;
+import org.example.project.controler.PlayerController;
 import org.example.project.models.extras.Vector2;
 import org.example.project.views.imgs.*;
 
@@ -26,6 +27,7 @@ public class GamePanelPC extends JPanel {
     private static final int ANCHO_MURO = 70;
     private static final int ALTO_MURO = 40;
     private static final int ESPACIO_HORIZONTAL = 100; // <-- El espacio
+    private Timer timer;
 
 
     private final int DISTANCIA_MINIMA_PARA_NUEVA = 80;
@@ -48,13 +50,15 @@ public class GamePanelPC extends JPanel {
         crearNaveEnemiga();
         contadorNavesCreadas++;
 
-        Timer timer = new Timer(10, e -> {
+        timer = new Timer(10, e -> {
             //Mover Balas
 
             if (GameController.getInstancia().checkShipHealth()){
                 ((Timer) e.getSource()).stop();
-                // finalizar juego porq estoy muerto.
+                restoreGame();
             }
+
+            if (GameController.getInstancia().isThereNoEnemyShipsLeft()) newGame();
 
             //Crear Naves
             if (contadorNavesCreadas < TOTAL_NAVES && ultimaNaveSeMovioSuficiente()) {
@@ -239,6 +243,19 @@ public class GamePanelPC extends JPanel {
                 e.mover(nuevoV.getX(), nuevoV.getY());
             }
         }
+    }
+
+    private void restoreGame() {
+        PlayerController.getInstance().addLifes(-1);
+        newGame();
+    }
+
+    private void newGame() {
+        GameController.getInstancia().restoreStatus();
+        crearNaveEnemiga();
+        contadorNavesCreadas = 1;
+        crearWalls(anchoPanel,altoPanel,ANCHO_MURO,ESPACIO_HORIZONTAL,ALTO_MURO);
+        timer.start();
     }
 }
 

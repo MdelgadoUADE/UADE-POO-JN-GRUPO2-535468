@@ -40,6 +40,14 @@ public class GameController {
         walls = new LinkedList<>();
     }
 
+    public void restoreStatus(){
+        proyectilesEnemigos.clear();
+        proyectilesJugador.clear();
+        enemyShips.clear();
+        walls.clear();
+        nave.setDamage(-1);
+    }
+
     public static GameController getInstancia(){
         if (instancia == null) instancia = new GameController();
         return instancia;
@@ -60,11 +68,11 @@ public class GameController {
         return p.getId();
     }
 
-    public  int crearEnemigoJugador(){
+    public int crearEnemigoJugador(){
         System.out.println("crearEnemigoJugador controlador");
         EnemyShips e = new EnemyShips(0,0,1,50,50,area);
         enemyShips.add(e);
-        return  e.getId();
+        return e.getId();
     }
 
     public  int crearWall(int x, int y,int ancho, int alto){
@@ -186,6 +194,10 @@ public class GameController {
 
     public void setDifficulty(Difficulty difficulty){
         selectedDifficulty = difficulty;
+    }
+
+    public boolean isThereNoEnemyShipsLeft(){
+        return enemyShips.isEmpty();
     }
 
     public void checkCollisions(){

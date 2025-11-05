@@ -20,6 +20,11 @@ public class PlayerController {
         lifeTracker = new LifeTracker(3);
     }
 
+    public void restoreStatus() {
+        scoreTracker.setScore(0);
+        lifeTracker.setLifes(3);
+    }
+
     public static PlayerController getInstance() {
         if (instance == null) {
             instance = new PlayerController();

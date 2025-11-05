@@ -1,5 +1,6 @@
 package org.example.project.views.windows;
 
+import org.example.project.controler.GameController;
 import org.example.project.controler.PlayerController;
 import org.example.project.interfaces.GameListener;
 import org.example.project.models.Ranking;
@@ -23,6 +24,9 @@ public class GameWindow extends JFrame implements GameListener {
 
     public GameWindow(JFrame previousFrame){
         PlayerController.getInstance().addListener(this);
+        PlayerController.getInstance().restoreStatus();
+        GameController.getInstancia().restoreStatus();
+
         this.previousFrame = previousFrame;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //DEJAR EN DO_NOTHING_ON_CLOSE PARA EVITAR CERRAR EL JUEGO
         setLayout(new BorderLayout());
