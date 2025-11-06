@@ -15,6 +15,8 @@ public class GamePanelPlayer extends JPanel {
     private JLabel playerScoreLabel;
     private JLabel playerLifesLabel;
     private LifeImg lifeImg;
+    private static final int TIEMPO_ENTRE_DISPAROS_PJ = 1000;
+    private long ultimoDisparo_PJ = 0;
 
     public GamePanelPlayer(int ancho, int alto, GamePanelPC panelPC) {
         this.panelPC = panelPC;
@@ -57,8 +59,12 @@ public class GamePanelPlayer extends JPanel {
                         imagenNave.mover(nuevaXD, imagenNave.getY());
                         break;
                     case KeyEvent.VK_SPACE:
-                        int centroNave = imagenNave.getX() + imagenNave.getAncho() / 2;
-                        panelPC.crearProyectil(centroNave);
+                        long ahora = System.currentTimeMillis();
+                        if (ahora - ultimoDisparo_PJ >= TIEMPO_ENTRE_DISPAROS_PJ) {
+                            int centroNave = imagenNave.getX() + imagenNave.getAncho() / 2;
+                            panelPC.crearProyectil(centroNave);
+                            ultimoDisparo_PJ = ahora;
+                        }
                         break;
                     case KeyEvent.VK_F1:
                         PlayerController.getInstance().addScore(200);
