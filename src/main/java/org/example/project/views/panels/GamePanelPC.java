@@ -58,7 +58,10 @@ public class GamePanelPC extends JPanel {
                 restoreGame();
             }
 
-            if (GameController.getInstancia().isThereNoEnemyShipsLeft()) newGame();
+            if (GameController.getInstancia().isThereNoEnemyShipsLeft()) {
+                newGame();
+                PlayerController.getInstance().addScore(200);
+            }
 
             //Crear Naves
             if (contadorNavesCreadas < TOTAL_NAVES && ultimaNaveSeMovioSuficiente()) {
