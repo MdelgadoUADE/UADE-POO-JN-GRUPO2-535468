@@ -28,7 +28,7 @@ public class GameController {
     private AreaDeJuego area;
     private final Random random = new Random();
     private long ultimoDisparo = 0;
-    private static final int TIEMPO_ENTRE_DISPAROS = 2000;
+    private static final int TIEMPO_ENTRE_DISPAROS = 1000;
     private static final int PUNTAJE_ELIMINACION = 20;
 
 
@@ -49,6 +49,10 @@ public class GameController {
         nave.setDamage(-1);
     }
 
+    public void restaurarVida(){
+        nave.setDamage(-1);
+    }
+
     public static GameController getInstancia(){
         if (instancia == null) instancia = new GameController();
         return instancia;
@@ -64,14 +68,14 @@ public class GameController {
 
     public int crearProyectilJugador(){
         int centroNave = centroEntity(nave.getView());
-        Proyectile p = new Proyectile(centroNave, area.getAlto(), -5,50,10,area);
+        Proyectile p = new Proyectile(centroNave, area.getAlto(), -5,50,5,area);
         proyectilesJugador.add(p);
         return p.getId();
     }
 
     public int crearEnemigoJugador(){
         //System.out.println("crearEnemigoJugador controlador");
-        EnemyShips e = new EnemyShips(0,0,1,50,10,area);
+        EnemyShips e = new EnemyShips(0,0,1,30,30,area);
         enemyShips.add(e);
         return e.getId();
     }
@@ -107,7 +111,7 @@ public class GameController {
         EntityView e = buscarNaveEnemigo(idNave);
         int centroNave = centroEntity(e);
         int y = e.getAreaObjeto().getAlto() + e.getPosition().getY();
-        Proyectile p = new Proyectile(centroNave, y, 5,50,50,area);
+        Proyectile p = new Proyectile(centroNave, y, 5,50,5,area);
         proyectilesEnemigos.add(p);
         return p.getId();
     }
@@ -217,8 +221,8 @@ public class GameController {
                 for (Wall muro : walls){
 
                     if (collision(bala , muro)){
-                        System.out.println(" COLISION Muro, Ancho: "+ muro.getArea().getAncho() + " Alto: " + muro.getArea().getAlto() + " X: " + muro.getPosition().getX() + " Y: " + muro.getPosition().getY());
-                        System.out.println("se detecto colision");
+                        //System.out.println(" COLISION Muro, Ancho: "+ muro.getArea().getAncho() + " Alto: " + muro.getArea().getAlto() + " X: " + muro.getPosition().getX() + " Y: " + muro.getPosition().getY());
+                        //System.out.println("se detecto colision");
                         muro.setDamage(2);
                         bala.setDelete();
                     }
@@ -250,8 +254,10 @@ public class GameController {
                 }
 
                 if( collisionNave(bala,nave)){
-                    //System.out.println("se detecto colision");
+                    System.out.println("se detecto colision");
+                    System.out.println(nave.getHealth());
                     nave.setDamage(1);
+                    System.out.println(nave.getHealth());
                     bala.setDelete();
                 }
             }

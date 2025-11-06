@@ -51,11 +51,9 @@ public class GamePanelPC extends JPanel {
         contadorNavesCreadas++;
 
         timer = new Timer(10, e -> {
-            //Mover Balas
-
             if (GameController.getInstancia().checkShipHealth()){
-                ((Timer) e.getSource()).stop();
-                restoreGame();
+                GameController.getInstancia().restaurarVida();
+                PlayerController.getInstance().addLifes(-1);
             }
 
             if (GameController.getInstancia().isThereNoEnemyShipsLeft()) {
@@ -81,9 +79,6 @@ public class GamePanelPC extends JPanel {
 
             //Checkear colicones Seba
             GameController.getInstancia().checkCollisions();
-
-            //Checkear Healths Joaco
-            //GameController.getInstancia().checkearHealth();
 
             //Eliminar elementos
             GameController.getInstancia().limpiar();
@@ -148,7 +143,7 @@ public class GamePanelPC extends JPanel {
             int id=GameController.getInstancia().crearWall(x,y,ANCHO_MURO,ALTO_MURO);
             WallImg w = new WallImg(id);
             w.setBounds(x,y,w.getAncho(),w.getAlto());
-            System.out.println("Ancho: " + w.getAncho() + " Alto: " + w.getAlto() + " X: " + x + " Y: " + y);
+            //System.out.println("Ancho: " + w.getAncho() + " Alto: " + w.getAlto() + " X: " + x + " Y: " + y);
             add(w);
             walls.add(w);
             x += bloque;

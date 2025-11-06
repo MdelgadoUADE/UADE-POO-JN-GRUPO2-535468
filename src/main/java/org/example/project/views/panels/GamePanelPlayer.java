@@ -81,7 +81,11 @@ public class GamePanelPlayer extends JPanel {
     }
 
     public void updateLifes(int lifes){
-        playerLifesLabel.setText(String.valueOf(lifes));
+        if (lifes < 0){
+            playerLifesLabel.setText(String.valueOf(0));
+        } else {
+            playerLifesLabel.setText(String.valueOf(lifes));
+        }
     }
     public void updateScore(int score){
         playerScoreLabel.setText("Score: " + score);

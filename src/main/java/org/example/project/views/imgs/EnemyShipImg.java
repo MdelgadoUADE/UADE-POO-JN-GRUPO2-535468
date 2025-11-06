@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EnemyShipImg extends JLabel{
-    private int ancho = 50;
-    private int alto = 50;
+    private int ancho = 30;
+    private int alto = 30;
     private int id;
 
     public EnemyShipImg(int id) {
