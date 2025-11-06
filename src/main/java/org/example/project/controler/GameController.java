@@ -64,14 +64,14 @@ public class GameController {
 
     public int crearProyectilJugador(){
         int centroNave = centroEntity(nave.getView());
-        Proyectile p = new Proyectile(centroNave, area.getAlto(), -5,50,50,area);
+        Proyectile p = new Proyectile(centroNave, area.getAlto(), -5,50,10,area);
         proyectilesJugador.add(p);
         return p.getId();
     }
 
     public int crearEnemigoJugador(){
         //System.out.println("crearEnemigoJugador controlador");
-        EnemyShips e = new EnemyShips(0,0,1,50,50,area);
+        EnemyShips e = new EnemyShips(0,0,1,50,10,area);
         enemyShips.add(e);
         return e.getId();
     }
