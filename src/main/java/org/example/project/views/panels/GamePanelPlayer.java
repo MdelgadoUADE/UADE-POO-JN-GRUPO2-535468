@@ -32,7 +32,8 @@ public class GamePanelPlayer extends JPanel {
 
         // nave centrada horizontalmente
         int xInicial = (ancho - imagenNave.getAncho()) / 2;
-        int yInicial = (alto - imagenNave.getAlto()) / 2;
+        //(int yInicial = (alto - imagenNave.getAlto()) / 2;
+        int yInicial = 0;
         imagenNave.setBounds(xInicial, yInicial, imagenNave.getAncho(), imagenNave.getAlto());
         playerScoreLabel.setBounds(ancho - ancho / 5, alto - alto / 2, 100, 50);
         lifeImg.setBounds(ancho / 20, alto - alto / 2, 40, 40 );
