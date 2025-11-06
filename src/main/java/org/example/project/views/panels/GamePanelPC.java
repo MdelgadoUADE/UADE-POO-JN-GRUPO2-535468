@@ -37,7 +37,7 @@ public class GamePanelPC extends JPanel {
         this.altoPanel = alto;
         setLayout(null);
         setPreferredSize(new Dimension(ancho, alto));
-        setBackground(Color.DARK_GRAY);
+        setBackground(Color.BLACK);
         proyectilesJugador = new ArrayList<>();
         enemiesShips = new ArrayList<>();
         proyectilesEnemigos = new ArrayList<>();
@@ -145,9 +145,11 @@ public class GamePanelPC extends JPanel {
             int id=GameController.getInstancia().crearWall(x,y,ANCHO_MURO,ALTO_MURO);
             WallImg w = new WallImg(id);
             w.setBounds(x,y,w.getAncho(),w.getAlto());
+            System.out.println("Ancho: " + w.getAncho() + " Alto: " + w.getAlto() + " X: " + x + " Y: " + y);
             add(w);
             walls.add(w);
             x += bloque;
+
 
         }
         repaint();
@@ -220,7 +222,7 @@ public class GamePanelPC extends JPanel {
         add(nave);
         enemiesShips.add(nave);
 
-        System.out.println("Nave enemiga creada en X=" + xInicial + ", Y=" + yInicial);
+        //System.out.println("Nave enemiga creada en X=" + xInicial + ", Y=" + yInicial);
         revalidate();
         repaint();
     }

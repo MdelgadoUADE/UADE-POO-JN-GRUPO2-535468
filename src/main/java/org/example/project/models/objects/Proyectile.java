@@ -22,7 +22,7 @@ public class Proyectile extends Entity {
         this.id=contador;
         this.delete=false;
         contador++;
-        System.out.println("NEW Proyectil x: "+ this.position.getX() +" y: "+ this.position.getY() + "velocidad: "+ this.velocidad);
+        //System.out.println("NEW Proyectil x: "+ this.position.getX() +" y: "+ this.position.getY() + "velocidad: "+ this.velocidad);
     }
 
     public EntityView getView() {
@@ -34,7 +34,7 @@ public class Proyectile extends Entity {
         if (this.position.getY() + this.velocidad > -this.areaObjeto.getAlto()*2) {
             this.position.setY(this.position.getY() + this.velocidad);
         }
-        System.out.println("Se movio objeto proyectil nuevaY: " + this.position.getY());
+        //System.out.println("Se movio objeto proyectil nuevaY: " + this.position.getY());
         return this.position.getY();
     }
 

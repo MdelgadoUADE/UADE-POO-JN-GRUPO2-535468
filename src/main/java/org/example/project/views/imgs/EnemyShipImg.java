@@ -9,7 +9,7 @@ public class EnemyShipImg extends JLabel{
     private int id;
 
     public EnemyShipImg(int id) {
-        System.out.println("Constructor Imagen Nave Enemiga");
+        //System.out.println("Constructor Imagen Nave Enemiga");
         Image imagen = new ImageIcon("naveEnemiga.png").getImage();
         Image imagenEscala = imagen.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(imagenEscala));

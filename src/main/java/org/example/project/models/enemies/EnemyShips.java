@@ -11,10 +11,10 @@ public class EnemyShips extends Entity {
     private int velocidad;
     
     public EnemyShips(int x, int y, int velocidad, int alto, int ancho, AreaDeJuego area){
-        System.out.println("Constructor Nave Enemiga");
+        //System.out.println("Constructor Nave Enemiga");
         this.position = new Vector2(x,y);
         this.areaObjeto = new AreaDeJuego(alto,ancho);
-        this.health = 4;
+        this.health = 1;
         this.area=area;
         this.velocidad=velocidad;
         contador++;

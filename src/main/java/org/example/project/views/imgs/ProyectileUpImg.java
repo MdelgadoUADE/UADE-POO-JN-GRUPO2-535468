@@ -21,7 +21,7 @@ public class ProyectileUpImg extends JLabel {
 
     public void mover(int nuevaX, int nuevaY) {
         setLocation(nuevaX, nuevaY);
-        System.out.println("Se movió imagen a X=" + nuevaX + " Y=" + nuevaY);
+        //System.out.println("Se movió imagen a X=" + nuevaX + " Y=" + nuevaY);
     }
 
     // GETTERS

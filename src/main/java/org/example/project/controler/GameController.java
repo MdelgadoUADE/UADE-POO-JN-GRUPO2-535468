@@ -29,6 +29,7 @@ public class GameController {
     private final Random random = new Random();
     private long ultimoDisparo = 0;
     private static final int TIEMPO_ENTRE_DISPAROS = 2000;
+    private static final int PUNTAJE_ELIMINACION = 20;
 
 
     private GameController(){
@@ -69,7 +70,7 @@ public class GameController {
     }
 
     public int crearEnemigoJugador(){
-        System.out.println("crearEnemigoJugador controlador");
+        //System.out.println("crearEnemigoJugador controlador");
         EnemyShips e = new EnemyShips(0,0,1,50,50,area);
         enemyShips.add(e);
         return e.getId();
@@ -89,9 +90,12 @@ public class GameController {
             if (idNave == enemyShips.get(i).getId()) {
                 v = enemyShips.get(i).mover();
 
-                if (v.getY() > area.getAlto()) {
-                    System.out.println("Eliminando nave enemiga id=" + idNave);
+                if (v.getY() + enemyShips.get(i).getArea().getAlto() > area.getAlto()) {
+                    //System.out.println("Eliminando nave enemiga id=" + idNave);
                     enemyShips.remove(i);
+                    PlayerController.getInstance().addLifes(-1);
+                    PlayerController.getInstance().addLifes(-1);
+                    PlayerController.getInstance().addLifes(-1);
                 }
                 return v;
             }
@@ -167,7 +171,7 @@ public class GameController {
     public int moverProyectilEnemigo(int idProyectil){
         for (int i = 0; i < proyectilesEnemigos.size(); i++) {
             if (idProyectil == proyectilesEnemigos.get(i).getId()){
-                System.out.println("Se mueve");
+                //System.out.println("Se mueve");
                 int nuevaY = proyectilesEnemigos.get(i).mover();
                 if (nuevaY > area.getAlto()) {
                     proyectilesEnemigos.remove(proyectilesEnemigos.get(i));
@@ -185,7 +189,7 @@ public class GameController {
                 ultimoDisparo = ahora;
                 int i = random.nextInt(enemyShips.size());
                 int id = enemyShips.get(i).getId();
-                System.out.println("Enemigo " + id + " dispara");
+                //System.out.println("Enemigo " + id + " dispara");
                 return id;
             }
         }
@@ -213,6 +217,7 @@ public class GameController {
                 for (Wall muro : walls){
 
                     if (collision(bala , muro)){
+                        System.out.println(" COLISION Muro, Ancho: "+ muro.getArea().getAncho() + " Alto: " + muro.getArea().getAlto() + " X: " + muro.getPosition().getX() + " Y: " + muro.getPosition().getY());
                         System.out.println("se detecto colision");
                         muro.setDamage(2);
                         bala.setDelete();
@@ -221,7 +226,8 @@ public class GameController {
                 for (EnemyShips naveEnemiga : enemyShips){
 
                     if (collision(bala , naveEnemiga)){
-                        System.out.println("se detecto colision");
+                        PlayerController.getInstance().addScore(PUNTAJE_ELIMINACION);
+                        //System.out.println("se detecto colision");
                         naveEnemiga.setDamage(1);
                         bala.setDelete();
                     }
@@ -236,7 +242,7 @@ public class GameController {
             for ( Proyectile bala : proyectilesEnemigos){
                 for (Wall muro : walls){
                     if (collision(bala , muro)){
-                        System.out.println("se detecto colision");
+                        //System.out.println("se detecto colision");
                         muro.setDamage(1);
                         bala.setDelete();
 
@@ -244,7 +250,7 @@ public class GameController {
                 }
 
                 if( collisionNave(bala,nave)){
-                    System.out.println("se detecto colision");
+                    //System.out.println("se detecto colision");
                     nave.setDamage(1);
                     bala.setDelete();
                 }

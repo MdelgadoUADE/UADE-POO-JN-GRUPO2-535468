@@ -8,7 +8,7 @@ public class ShipImg  extends JLabel{
     private int alto = 50;
 
     public ShipImg() {
-        System.out.println("Constructor Imagen Nave");
+        //System.out.println("Constructor Imagen Nave");
         Image imagen = new ImageIcon("nave.jpg").getImage();
         Image imagenEscala = imagen.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(imagenEscala));
@@ -17,7 +17,7 @@ public class ShipImg  extends JLabel{
 
     public void mover(int nuevaX, int nuevaY) {
         setLocation(nuevaX, nuevaY);
-        System.out.println("Se movió imagen a X=" + nuevaX + " Y=" + nuevaY);
+        //System.out.println("Se movió imagen a X=" + nuevaX + " Y=" + nuevaY);
     }
 
     public int getAncho() {

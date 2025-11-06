@@ -21,7 +21,7 @@ public class PlayerShip extends Entity {
         if (this.position.getX() - this.velocidad > 0) {
             this.position.setX(this.position.getX() - this.velocidad);
         }
-        System.out.println("Se movio izquierda objeto nave");
+        //System.out.println("Se movio izquierda objeto nave");
         return this.position.getX();
     }
 
@@ -29,7 +29,7 @@ public class PlayerShip extends Entity {
         if (this.position.getX() - this.velocidad + this.areaObjeto.getAncho() <= area.getAncho()) {
             this.position.setX(this.position.getX() + this.velocidad);
         }
-        System.out.println("Se movio derecha objeto nave");
+        //System.out.println("Se movio derecha objeto nave");
         return this.position.getX();
     }
 

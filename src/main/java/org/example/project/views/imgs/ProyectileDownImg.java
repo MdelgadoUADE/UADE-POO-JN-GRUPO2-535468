@@ -21,7 +21,7 @@ public class ProyectileDownImg extends JLabel {
 
     public void mover(int nuevaX, int nuevaY) {
         setLocation(nuevaX, nuevaY);
-        System.out.println("Se movió imagen pryectil enemigo a X=" + nuevaX + " Y=" + nuevaY);
+        //System.out.println("Se movió imagen pryectil enemigo a X=" + nuevaX + " Y=" + nuevaY);
     }
 
     // GETTERS
