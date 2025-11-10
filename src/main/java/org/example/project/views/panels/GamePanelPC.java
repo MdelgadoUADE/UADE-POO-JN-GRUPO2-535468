@@ -212,7 +212,7 @@ public class GamePanelPC extends JPanel {
     }
 
     public void crearNaveEnemiga(){
-        int idNave = GameController.getInstancia().crearEnemigoJugador();
+        int idNave = GameController.getInstancia().crearNaveEnemiga();
         EnemyShipImg nave = new EnemyShipImg(idNave);
         int xInicial = 0;
         int yInicial = 0;

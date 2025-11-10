@@ -1,6 +1,6 @@
 package org.example.project.views.windows;
 
-import org.example.project.controler.PlayerController;
+import org.example.project.controler.MenuController;
 import org.example.project.models.Ranking;
 import org.example.project.views.modals.ContinueOption;
 import org.example.project.views.modals.RankingAskModal;
@@ -15,6 +15,10 @@ import java.awt.event.WindowEvent;
 public class StartWindow extends JFrame {
 
     private JLabel titlelbl;
+
+    private JPanel creditspnl;
+    private JLabel creditsAvailablelbl;
+    private JButton addCreditsbtn;
 
     private JButton startGamebtn;
     private JButton exitbtn;
@@ -32,9 +36,22 @@ public class StartWindow extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //Definicion de botones
+        addCreditsbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addCoins(1);
+            }
+        });
+
         startGamebtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (MenuController.getInstance().availableCoins() <= 0){
+                    JOptionPane.showMessageDialog(StartWindow.this, "No tiene suficientes creditos, por favor ingrese mas", "No tiene Creditos", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                addCoins(-1);
 
                 GameWindow gw = new GameWindow(StartWindow.this);
                 StartWindow.super.setVisible(false);
@@ -88,7 +105,8 @@ public class StartWindow extends JFrame {
     private void confWindow(){
         this.setTitle("Space Invaders | Main Menu");
         Container c = this.getContentPane();
-        c.setLayout(new GridLayout(2,1));
+        c.setLayout(new GridLayout(3,1));
+
 
         this.titlelbl = new JLabel("<HTML><PRE>   _____                        _____                     _               <BR>" +
                 "  / ____|                      |_   _|                   | |              <BR>" +
@@ -100,6 +118,17 @@ public class StartWindow extends JFrame {
                 "        |_|                                                               </PRE></HTML>");
         this.titlelbl.setHorizontalAlignment(SwingConstants.CENTER);
 
+
+
+        this.creditsAvailablelbl = new JLabel("Creditos Disponibles: " + MenuController.getInstance().availableCoins());
+        this.addCreditsbtn = new JButton("Anadir Creditos");
+        this.creditspnl = new JPanel(new GridLayout(1,2));
+
+        creditspnl.add(addCreditsbtn);
+        creditspnl.add(creditsAvailablelbl);
+
+
+
         this.startGamebtn = new JButton("Comenzar Juego");
         this.rankingTablebtn = new JButton("Rankings");
         this.exitbtn = new JButton("Salir de Juego");
@@ -110,9 +139,15 @@ public class StartWindow extends JFrame {
         buttonpnl.add(this.startGamebtn);
         buttonpnl.add(this.rankingTablebtn);
         buttonpnl.add(this.exitbtn);
+        this.add(creditspnl);
         this.add(titlelbl);
         this.add(buttonpnl);
         this.pack();
+    }
+
+    private void addCoins(int quantity){
+        MenuController.getInstance().addCoins(quantity);
+        creditsAvailablelbl.setText("Creditos Disponibles: " + MenuController.getInstance().availableCoins());
     }
 
 }

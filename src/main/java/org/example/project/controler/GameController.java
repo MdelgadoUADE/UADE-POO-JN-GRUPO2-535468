@@ -27,7 +27,7 @@ public class GameController {
     private PlayerShip nave;
     private AreaDeJuego area;
     private final Random random = new Random();
-    private long ultimoDisparo = 0;
+    private static long ultimoDisparo = 0;
     private static final int TIEMPO_ENTRE_DISPAROS = 1000;
     private static final int PUNTAJE_ELIMINACION = 20;
 
@@ -73,7 +73,7 @@ public class GameController {
         return p.getId();
     }
 
-    public int crearEnemigoJugador(){
+    public int crearNaveEnemiga(){
         //System.out.println("crearEnemigoJugador controlador");
         EnemyShips e = new EnemyShips(0,0,1,30,30,area);
         enemyShips.add(e);

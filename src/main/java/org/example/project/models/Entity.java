@@ -3,7 +3,7 @@ package org.example.project.models;
 import org.example.project.models.extras.AreaDeJuego;
 import org.example.project.models.extras.Vector2;
 
-public class Entity {
+public abstract class Entity {
     protected Vector2 position;
     protected int health;
     protected AreaDeJuego areaObjeto;
