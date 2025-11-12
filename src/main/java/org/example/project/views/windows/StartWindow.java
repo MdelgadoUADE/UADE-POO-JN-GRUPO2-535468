@@ -71,6 +71,12 @@ public class StartWindow extends JFrame {
                             StartWindow.super.setVisible(true);
                         }
                     }
+
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        super.windowClosed(e);
+                        gw.stopTimer();
+                    }
                 });
             }
         });

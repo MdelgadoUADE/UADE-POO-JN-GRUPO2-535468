@@ -53,7 +53,11 @@ public class GamePanelPC extends JPanel {
         timer = new Timer(10, e -> {
             if (GameController.getInstancia().checkShipHealth()){
                 GameController.getInstancia().restaurarVida();
+                if (PlayerController.getInstance().getLifes() == 0){
+                    timer.stop();
+                }
                 PlayerController.getInstance().addLifes(-1);
+
             }
 
             if (GameController.getInstancia().isThereNoEnemyShipsLeft()) {
@@ -69,6 +73,7 @@ public class GamePanelPC extends JPanel {
             //MoverBalas
             moverProyectilesJugador();
             moverProyectilesEnemigos();
+            System.out.println("movimiento");
             //Mover Naves Kiara
             moverNaveEnemigo();
             //Disparo Enemigo
@@ -125,8 +130,6 @@ public class GamePanelPC extends JPanel {
             }
             return false;
         } );
-
-
     }
 
     private void crearWalls(int anchoPanel, int altoPanel, int ANCHO_MURO ,int ESPACIO_HORIZONTAL,int ALTO_MURO) {
@@ -245,17 +248,16 @@ public class GamePanelPC extends JPanel {
         }
     }
 
-    private void restoreGame() {
-        PlayerController.getInstance().addLifes(-1);
-        newGame();
-    }
-
     private void newGame() {
         GameController.getInstancia().restoreStatus();
         crearNaveEnemiga();
         contadorNavesCreadas = 1;
         crearWalls(anchoPanel,altoPanel,ANCHO_MURO,ESPACIO_HORIZONTAL,ALTO_MURO);
         timer.start();
+    }
+
+    public void stopTimer(){
+        timer.stop();
     }
 }
 

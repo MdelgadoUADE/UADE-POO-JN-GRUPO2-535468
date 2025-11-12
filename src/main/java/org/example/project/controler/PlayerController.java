@@ -48,7 +48,8 @@ public class PlayerController {
 
     public void addLifes(int quantity) {
         notifyLifeChange(getLifes() + quantity);
-        if((getLifes() - quantity < 0 )|| (getLifes() == 0 && quantity < 0) ) {
+        if((getLifes() - quantity < 0 ) || (getLifes() == 0 && quantity < 0) ) {
+            GameController.getInstancia().restoreStatus();
             notifyGameOver();
         } else
             lifeTracker.setLifes(quantity + getLifes());

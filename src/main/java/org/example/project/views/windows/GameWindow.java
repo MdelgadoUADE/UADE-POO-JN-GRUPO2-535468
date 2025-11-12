@@ -67,9 +67,15 @@ public class GameWindow extends JFrame implements GameListener {
         this.dispose();
     }
 
+    public void stopTimer(){
+        panelPC.stopTimer();
+    }
+
     @Override
     public void onScoreChange(int score) {
-        panelJugador.updateScore(score);
+        if (panelJugador != null) {
+            panelJugador.updateScore(score);
+        }
     }
 
     @Override
