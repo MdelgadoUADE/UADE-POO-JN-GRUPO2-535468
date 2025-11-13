@@ -75,14 +75,15 @@ public class GameController {
 
     public int crearNaveEnemiga(){
         //System.out.println("crearEnemigoJugador controlador");
-        EnemyShips e = new EnemyShips(0,0,1,30,30,area);
+        EnemyShips e = new EnemyShips(0,0,
+                selectedDifficulty.getEnemyVelocity(), 30,30,area);
         enemyShips.add(e);
         return e.getId();
     }
 
     public  int crearWall(int x, int y,int ancho, int alto){
         System.out.println(" creando muro");
-        Wall w = new Wall(x,y,ancho,alto,area);
+        Wall w = new Wall(x,y,selectedDifficulty.getWallLife(),ancho,alto,area);
         walls.add(w);
         return  w.getId();
     }
@@ -188,7 +189,7 @@ public class GameController {
 
     public int asignarDisparo() {
         long ahora = System.currentTimeMillis();
-        if (ahora - ultimoDisparo >= TIEMPO_ENTRE_DISPAROS && !enemyShips.isEmpty()) {
+        if (ahora - ultimoDisparo >= selectedDifficulty.getEnemyROF() && !enemyShips.isEmpty()) {
             if (random.nextDouble() < 0.10) {
                 ultimoDisparo = ahora;
                 int i = random.nextInt(enemyShips.size());
