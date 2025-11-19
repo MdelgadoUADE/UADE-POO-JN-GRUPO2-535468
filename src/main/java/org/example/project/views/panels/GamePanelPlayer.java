@@ -4,6 +4,8 @@ import org.example.project.controler.PlayerController;
 import org.example.project.views.imgs.LifeImg;
 import org.example.project.views.imgs.ShipImg;
 import org.example.project.controler.GameController;
+import org.example.project.views.listeners.KeyListenerAdapter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -47,7 +49,7 @@ public class GamePanelPlayer extends JPanel {
         setFocusable(true);
         requestFocusInWindow();
 
-        addKeyListener(new KeyAdapter() {
+        addKeyListener(new KeyListenerAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {

@@ -57,7 +57,6 @@ public class GamePanelPC extends JPanel {
                     timer.stop();
                 }
                 PlayerController.getInstance().addLifes(-1);
-
             }
 
             if (GameController.getInstancia().isThereNoEnemyShipsLeft()) {
