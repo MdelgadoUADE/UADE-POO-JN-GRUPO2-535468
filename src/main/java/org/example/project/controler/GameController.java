@@ -47,7 +47,7 @@ public class GameController {
         enemyShips.clear();
         walls.clear();
         nave = new PlayerShip(200,350,7,50,50,area);
-        nave.setDamage(-1);
+        //nave.setDamage(-1);
     }
 
     public void restaurarVida(){
@@ -99,9 +99,7 @@ public class GameController {
                 if (v.getY() + enemyShips.get(i).getArea().getAlto() > area.getAlto()) {
                     //System.out.println("Eliminando nave enemiga id=" + idNave);
                     enemyShips.remove(i);
-                    PlayerController.getInstance().addLifes(-1);
-                    PlayerController.getInstance().addLifes(-1);
-                    PlayerController.getInstance().addLifes(-1);
+                    PlayerController.getInstance().addLifes(-99);
                 }
                 return v;
             }
