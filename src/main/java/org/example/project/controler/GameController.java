@@ -46,6 +46,7 @@ public class GameController {
         proyectilesJugador.clear();
         enemyShips.clear();
         walls.clear();
+        nave = new PlayerShip(200,350,7,50,50,area);
         nave.setDamage(-1);
     }
 
